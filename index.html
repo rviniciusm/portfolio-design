@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vinicius Medeiros | Portfólio de Design</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <link id="dynamic-google-font" rel="stylesheet" href="">
+    <style>
+        :root {
+            --bg-hero: #BFD7ED;
+            --bg-about: #ffffff;
+            --bg-experience: #F3F4F6;
+            --bg-projects: #FD3E20; 
+            --bg-marketing: #F3F4F6;
+            --bg-contact: #FE484B; 
+            --text-main: #111827;
+            --accent: #FD3E20;
+            
+            --font-titles: 'Cy Grotesk Grand', 'Inter', sans-serif;
+            --font-body: 'Helvetica World', 'Helvetica Neue', 'Helvetica', Arial, sans-serif;
+        }
+
+        body {
+            font-family: var(--font-body);
+            scroll-behavior: smooth;
+            background-color: white;
+            color: var(--text-main);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            cursor: none; 
+        }
+
+        /* --- TEXTURA DE GRÃO --- */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+            opacity: 0.05;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* --- CURSOR PERSONALIZADO --- */
+        #custom-cursor {
+            position: fixed;
+            width: 12px;
+            height: 12px;
+            background-color: var(--accent);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 10000;
+            mix-blend-difference: difference;
+            transition: transform 0.15s ease-out;
+            transform: translate(-50%, -50%);
+        }
+
+        #custom-cursor.hovered {
+            transform: translate(-50%, -50%) scale(5);
+            background-color: white;
+            opacity: 0.5;
+        }
+
+        h1, h2, h3, h4, .font-title {
+            font-family: var(--font-titles);
+            font-weight: 300;
+            letter-spacing: -0.03em;
+            line-height: 1.05;
+        }
+
+        /* --- NAVEGAÇÃO GLASS --- */
+        .glass-nav {
+            position: fixed;
+            top: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 1200px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.4); 
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 100px;
+            padding: 12px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .brand-name {
+            display: inline-block;
+            transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+            position: relative;
+            letter-spacing: -0.02em;
+        }
+
+        .brand-name:hover {
+            color: var(--accent);
+            transform: scale(1.05);
+            letter-spacing: 0.05em;
+        }
+
+        .nav-item {
+            position: relative;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 600;
+            color: var(--text-main);
+            transition: all 0.3s ease;
+        }
+
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--accent);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .nav-item:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .nav-item:hover {
+            color: var(--accent);
+        }
+
+        /* --- MENU MOBILE OVERLAY --- */
+        #mobileMenuOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            z-index: 1001;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .mobile-nav-item {
+            font-family: var(--font-titles);
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: var(--text-main);
+            transition: transform 0.3s ease;
+        }
+
+        /* --- ANIMAÇÕES DE REVEAL --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+            will-change: transform, opacity;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stagger-1 { transition-delay: 0.1s; }
+        .stagger-2 { transition-delay: 0.2s; }
+
+        .image-card {
+            border-radius: 24px;
+            overflow: hidden;
+            transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.6s ease;
+            background: rgba(0,0,0,0.05);
+        }
+
+        .image-card:hover {
+            transform: scale(1.04);
+            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.18);
+        }
+
+        .experience-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 32px;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+
+        .experience-card:hover {
+            border-color: var(--accent); 
+            transform: translateY(-8px);
+        }
+
+        #lightbox {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(15px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        #lightbox.active { display: flex; opacity: 1; }
+
+        @media (max-width: 768px) {
+            #custom-cursor { display: none; }
+            body { cursor: auto; }
+            .glass-nav { padding: 12px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="custom-cursor"></div>
+
+    <!-- Menu Mobile Overlay -->
+    <div id="mobileMenuOverlay">
+        <button id="closeMenu" class="absolute top-10 right-10 text-4xl">&times;</button>
+        <a href="#sobre" class="mobile-nav-item">Sobre</a>
+        <a href="#experiencia" class="mobile-nav-item">Experiência</a>
+        <a href="#projetos" class="mobile-nav-item">Projetos</a>
+        <a href="#marketing" class="mobile-nav-item">Social Media</a>
+        <a href="#contato" class="mobile-nav-item">Contato</a>
+    </div>
+
+    <div id="lightbox">
+        <div class="close-lightbox absolute top-10 right-10 text-white text-5xl cursor-pointer">&times;</div>
+        <img src="" alt="Ampliar Imagem" id="lightbox-img" class="max-w-[90%] max-h-[85vh] rounded-2xl shadow-2xl transition-transform duration-500 scale-90">
+    </div>
+
+    <!-- Barra de Navegação -->
+    <nav class="glass-nav">
+        <div class="tracking-tighter font-title">
+            <span class="brand-name" id="brandName">Vinicius Medeiros</span>
+        </div>
+        <div class="space-x-8 hidden md:flex">
+            <a href="#sobre" class="nav-item">Sobre</a>
+            <a href="#experiencia" class="nav-item">Experiência</a>
+            <a href="#projetos" class="nav-item">Projetos</a>
+            <a href="#marketing" class="nav-item">Social Media</a>
+            <a href="#contato" class="nav-item">Contato</a>
+        </div>
+        <button class="md:hidden" id="menuToggle">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16"></path></svg>
+        </button>
+    </nav>
+
+    <!-- Seção Capa -->
+    <section class="min-h-screen flex flex-col justify-center px-6 md:px-20 pt-48 pb-16 bg-[#BFD7ED]">
+        <div class="max-w-7xl mx-auto w-full">
+            <h1 class="text-6xl md:text-[10rem] font-light mb-16 reveal active">Portfólio de design</h1>
+            <div class="w-full aspect-[16/9] md:aspect-[21/9] image-card shadow-lg reveal active stagger-1">
+                <img src="images/hero.jpg" alt="Destaque" class="w-full h-full object-cover">
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Sobre -->
+    <section id="sobre" class="py-32 px-6 md:px-20 bg-white">
+        <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-20">
+            <div class="w-64 h-64 md:w-80 md:h-80 flex-shrink-0 image-card shadow-2xl reveal">
+                <img src="images/perfil.jpg" alt="Vinicius" class="w-full h-full object-cover">
+            </div>
+            <div class="reveal stagger-1">
+                <h2 class="text-4xl md:text-5xl font-light mb-10 leading-tight">
+                    <span class="italic" style="color: var(--accent)">Olá, sou o Vinicius!</span> Criando identidades e soluções visuais que dão vida a projetos.
+                </h2>
+                <p class="text-lg text-gray-500 mb-8 max-w-xl">
+                    Designer Digital focado em criar produtos que equilibram estética e funcionalidade. Formado pela <b>UFC</b>, busco sempre o impacto positivo através do design.
+                </p>
+                <div class="flex items-center gap-4">
+                    <div class="h-[1px] w-12 bg-black"></div>
+                    <span class="uppercase tracking-widest text-[10px] font-bold text-black">Designer</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Experiência -->
+    <section id="experiencia" class="py-32 px-6 md:px-20 bg-[#F3F4F6]">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+                <div class="lg:col-span-4 reveal">
+                    <h2 class="text-5xl md:text-7xl font-light mb-12">Trajetória</h2>
+                    <div class="mb-12">
+                        <span class="text-[10px] font-bold uppercase tracking-widest block mb-2" style="color: var(--accent)">Formação</span>
+                        <h3 class="text-2xl font-light mt-2">Design Digital</h3>
+                        <p class="text-sm">Universidade Federal do Ceará (UFC)</p>
+                    </div>
+                </div>
+                <div class="lg:col-span-8 space-y-8">
+                    <!-- JIT Technology -->
+                    <div class="experience-card reveal stagger-1">
+                        <div class="flex flex-col md:flex-row justify-between mb-6">
+                            <div>
+                                <h3 class="text-2xl font-light">JIT Technology</h3>
+                                <p class="text-sm font-medium" style="color: var(--accent)">Designer Digital / Social Media</p>
+                            </div>
+                            <span class="text-gray-400 text-xs mt-2 md:mt-0 uppercase tracking-widest">Mar 2025 — Set 2025</span>
+                        </div>
+                        <p class="text-sm text-gray-600">Design para Social Media, diagramação de E-books e gestão estratégica de redes sociais.</p>
+                    </div>
+                    <!-- Cego Aderaldo -->
+                    <div class="experience-card reveal stagger-2">
+                        <div class="flex flex-col md:flex-row justify-between mb-6">
+                            <div>
+                                <h3 class="text-2xl font-light">Casa de Saberes Cego Aderaldo</h3>
+                                <p class="text-sm font-medium" style="color: var(--accent)">Designer Digital (Equipe Multidisciplinar)</p>
+                            </div>
+                            <span class="text-gray-400 text-xs mt-2 md:mt-0 uppercase tracking-widest">Mar 2023 — Jun 2023</span>
+                        </div>
+                        <p class="text-sm text-gray-600">Foco em UX/UI e organização de demandas culturais digitais em equipamentos públicos.</p>
+                    </div>
+                    <!-- AMMA -->
+                    <div class="experience-card reveal stagger-3">
+                        <div class="flex flex-col md:flex-row justify-between mb-6">
+                            <div>
+                                <h3 class="text-2xl font-light">Autarquia Municipal do Meio Ambiente (AMMA)</h3>
+                                <p class="text-sm font-medium" style="color: var(--accent)">Designer Digital (Administração Pública)</p>
+                            </div>
+                            <span class="text-gray-400 text-xs mt-2 md:mt-0 uppercase tracking-widest">Ago 2022 — Dez 2022</span>
+                        </div>
+                        <p class="text-sm text-gray-600">Desenvolvimento de campanhas visuais, branding institucional e materiais de conscientização.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Projetos -->
+    <section id="projetos" class="py-32 px-6 md:px-20 bg-[#FD3E20]">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-baseline mb-24 gap-8">
+                <h2 class="text-5xl md:text-8xl font-light reveal text-white">Meus Projetos</h2>
+                <p class="text-white/80 max-w-xs italic text-base reveal stagger-1">"Trabalhos selecionados que traduzem minha identidade."</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-8">
+                <a href="https://www.behance.net/gallery/247057833/Tracos-e-Memorias-UIUX-Design-Narrative-Design" target="_blank" class="block reveal stagger-1">
+                    <div class="aspect-square image-card mb-8 shadow-xl"><img src="images/projeto1.jpg" class="w-full h-full object-cover"></div>
+                    <span class="project-tag text-white/60">UI/UX Design</span>
+                    <h4 class="text-2xl font-light mt-3 text-white">Traços e Memórias</h4>
+                </a>
+                <a href="https://www.behance.net/gallery/219407775/Definido-GYM-Mobile-App-UIUX-Design" target="_blank" class="block reveal stagger-2">
+                    <div class="aspect-square image-card mb-8 shadow-xl"><img src="images/projeto2.jpg" class="w-full h-full object-cover"></div>
+                    <span class="project-tag text-white/60">Mobile App</span>
+                    <h4 class="text-2xl font-light mt-3 text-white">+Definido</h4>
+                </a>
+                <a href="https://www.behance.net/gallery/219370645/NIMBO-coffee-bakeryBrand-Identity" target="_blank" class="block reveal stagger-3">
+                    <div class="aspect-square image-card mb-8 shadow-xl"><img src="images/projeto3.jpg" class="w-full h-full object-cover"></div>
+                    <span class="project-tag text-white/60">Brand Identity</span>
+                    <h4 class="text-2xl font-light mt-3 text-white">NIMBO</h4>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Media -->
+    <section id="marketing" class="py-32 px-6 md:px-20 bg-[#F3F4F6]">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-5xl md:text-7xl font-light reveal mb-16">Social Media</h2>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-20">
+                <div class="aspect-[9/16] image-card shadow-md reveal stagger-1 story-trigger"><img src="images/story1.jpg" class="w-full h-full object-cover"></div>
+                <div class="aspect-[9/16] image-card shadow-md reveal stagger-2 story-trigger"><img src="images/story2.jpg" class="w-full h-full object-cover"></div>
+                <div class="aspect-[9/16] image-card shadow-md reveal stagger-3 story-trigger"><img src="images/story3.jpg" class="w-full h-full object-cover"></div>
+                <div class="aspect-[9/16] image-card shadow-md reveal stagger-1 story-trigger"><img src="images/story4.jpg" class="w-full h-full object-cover"></div>
+                <div class="aspect-[9/16] image-card shadow-md reveal stagger-2 story-trigger"><img src="images/story5.jpg" class="w-full h-full object-cover"></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="aspect-[4/5] image-card shadow-lg reveal stagger-1 story-trigger"><img src="images/post1.jpg" class="w-full h-full object-cover"></div>
+                <div class="aspect-[4/5] image-card shadow-lg reveal stagger-2 story-trigger"><img src="images/post2.jpg" class="w-full h-full object-cover"></div>
+                <div class="aspect-[4/5] image-card shadow-lg reveal stagger-3 story-trigger"><img src="images/post3.jpg" class="w-full h-full object-cover"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Contato -->
+    <footer id="contato" class="py-32 px-6 bg-[#FE484B] text-white">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-5xl md:text-8xl font-light mb-20 reveal text-white">Vamos trabalhar juntos!</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-20 text-white">
+                <div>
+                    <h3 class="text-[10px] font-semibold uppercase tracking-[0.3em] mb-6 text-white">Redes sociais</h3>
+                    <p class="text-2xl font-light text-white">@rviniciusm</p>
+                    <div class="flex gap-4 mt-8">
+                        <a href="https://www.behance.net/viniddmed" target="_blank" class="w-10 h-10 border border-white/40 rounded-full flex items-center justify-center hover:bg-white hover:text-[#FE484B] transition-all">
+                            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M22 13.53h-8.08c-.02 1.2.92 2.25 2.13 2.25 1.1 0 1.73-.7 1.73-.7l1.97 1.25s-1.07 2.1-4 2.1c-3.1 0-5.12-2.3-5.12-5.43s2.17-5.5 5.17-5.5c3.04 0 4.8 2.23 4.8 5.17s-.6 1.07-.6 1.07zm-4.78-4.14c-1.12 0-1.85.9-1.85 2.1h3.75c-.15-1.4-.95-2.1-1.9-2.1zM5.33 6h-3.33v12h4.52c2.4 0 3.8-1.1 3.8-3.05 0-1.78-1.2-2.58-1.2-2.58s1.15-.65 1.15-2.28c0-1.78-1.13-2.58-3-2.58s-1.94-.1-1.94-.1zm1.05 2.5h1.2c.8 0 1.34.45 1.34 1.1s-.5 1.14-1.35 1.14h-1.2v-2.24zm0 4.4h1.4c1 0 1.63.54 1.63 1.35s-.55 1.38-1.6 1.38h-1.43v-2.73z"/></svg>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-[10px] font-semibold uppercase tracking-[0.3em] mb-6 text-white">E-mail</h3>
+                    <p class="text-2xl font-light text-white">medeirosvinicius888@gmail.com</p>
+                </div>
+                <div>
+                    <h3 class="text-[10px] font-semibold uppercase tracking-[0.3em] mb-6 text-white">Telefone</h3>
+                    <p class="text-2xl font-light text-white">(88) 9690-9768</p>
+                    <div class="mt-16 text-right">
+                        <a href="#" class="inline-flex flex-col items-center group">
+                            <div class="w-12 h-12 bg-white text-[#FE484B] rounded-full flex items-center justify-center mb-4 transition-transform group-hover:-translate-y-2">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
+                            </div>
+                            <span class="text-[10px] font-bold uppercase tracking-widest text-white">Voltar ao topo</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="pt-10 border-t border-white/20 text-[9px] uppercase tracking-widest flex justify-between text-white">
+                <span>© 2026 Vinicius Medeiros</span>
+                <span>Designer</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- MENU MOBILE ---
+        const menuToggle = document.getElementById('menuToggle');
+        const closeMenu = document.getElementById('closeMenu');
+        const mobileMenu = document.getElementById('mobileMenuOverlay');
+        const mobileLinks = document.querySelectorAll('.mobile-nav-item');
+
+        const openMobileMenu = () => {
+            mobileMenu.style.display = 'flex';
+            setTimeout(() => mobileMenu.style.opacity = '1', 10);
+            document.body.style.overflow = 'hidden';
+        };
+
+        const closeMobileMenu = () => {
+            mobileMenu.style.opacity = '0';
+            setTimeout(() => mobileMenu.style.display = 'none', 500);
+            document.body.style.overflow = 'auto';
+        };
+
+        menuToggle.addEventListener('click', openMobileMenu);
+        closeMenu.addEventListener('click', closeMobileMenu);
+        mobileLinks.forEach(link => link.addEventListener('click', closeMobileMenu));
+
+        // --- CURSOR ---
+        const cursor = document.getElementById('custom-cursor');
+        let mouseX = 0, mouseY = 0, cursorX = 0, cursorY = 0;
+        document.addEventListener('mousemove', (e) => { mouseX = e.clientX; mouseY = e.clientY; });
+        function animateCursor() {
+            cursorX += (mouseX - cursorX) * 0.15;
+            cursorY += (mouseY - cursorY) * 0.15;
+            cursor.style.left = cursorX + 'px';
+            cursor.style.top = cursorY + 'px';
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+        document.querySelectorAll('a, button, .image-card, .brand-name').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
+        });
+
+        // --- FONTE ALEATÓRIA ---
+        const brandName = document.getElementById('brandName');
+        const dynamicFontLink = document.getElementById('dynamic-google-font');
+        const artisticFonts = ['Pacifico', 'Monoton', 'Righteous', 'Creepster', 'Lobster', 'Sacramento', 'Special Elite', 'Syne Mono', 'Major Mono Display'];
+        brandName.addEventListener('mouseenter', () => {
+            const randomFont = artisticFonts[Math.floor(Math.random() * artisticFonts.length)];
+            dynamicFontLink.href = `https://fonts.googleapis.com/css2?family=${randomFont.replace(/ /g, '+')}&display=swap`;
+            brandName.style.fontFamily = `'${randomFont}', sans-serif`;
+        });
+
+        // --- REVEAL E LIGHTBOX ---
+        function reveal() {
+            document.querySelectorAll(".reveal").forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 100 && rect.bottom > 0) el.classList.add("active");
+                else el.classList.remove("active");
+            });
+        }
+        window.addEventListener("scroll", reveal);
+        window.addEventListener("load", reveal);
+
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        document.querySelectorAll('.story-trigger').forEach(trigger => {
+            trigger.addEventListener('click', () => {
+                lightboxImg.src = trigger.querySelector('img').src;
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+        const closeLB = () => { lightbox.classList.remove('active'); document.body.style.overflow = 'auto'; };
+        lightbox.addEventListener('click', (e) => { if(e.target !== lightboxImg) closeLB(); });
+        document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeLB(); });
+    </script>
+</body>
+</html>
