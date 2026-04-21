@@ -13,6 +13,7 @@
             --bg-about: #ffffff;
             --bg-experience: #F3F4F6;
             --bg-projects: #FD3E20; 
+            --bg-posters: #ffffff;
             --bg-marketing: #F3F4F6;
             --bg-contact: #FE484B; 
             --text-main: #111827;
@@ -77,7 +78,7 @@
             left: 50%;
             transform: translateX(-50%);
             width: 90%;
-            max-width: 1200px;
+            max-width: 1250px;
             z-index: 1000;
             background: rgba(255, 255, 255, 0.4); 
             backdrop-filter: blur(20px);
@@ -180,6 +181,7 @@
 
         .stagger-1 { transition-delay: 0.1s; }
         .stagger-2 { transition-delay: 0.2s; }
+        .stagger-3 { transition-delay: 0.3s; }
 
         .image-card {
             border-radius: 24px;
@@ -191,6 +193,13 @@
         .image-card:hover {
             transform: scale(1.04);
             box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.18);
+        }
+
+        /* Estilo específico para Cartazes (Proporção A4) */
+        .poster-card {
+            aspect-ratio: 1 / 1.414; /* Proporção clássica A4 */
+            border-radius: 12px;
+            box-shadow: 0 10px 25px -10px rgba(0,0,0,0.1);
         }
 
         .experience-card {
@@ -212,6 +221,7 @@
             top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0, 0, 0, 0.85);
             backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             z-index: 2000;
             justify-content: center;
             align-items: center;
@@ -238,12 +248,13 @@
         <a href="#sobre" class="mobile-nav-item">Sobre</a>
         <a href="#experiencia" class="mobile-nav-item">Experiência</a>
         <a href="#projetos" class="mobile-nav-item">Projetos</a>
+        <a href="#posters" class="mobile-nav-item">Posters</a>
         <a href="#marketing" class="mobile-nav-item">Social Media</a>
         <a href="#contato" class="mobile-nav-item">Contato</a>
     </div>
 
     <div id="lightbox">
-        <div class="close-lightbox absolute top-10 right-10 text-white text-5xl cursor-pointer">&times;</div>
+        <div class="close-lightbox absolute top-10 right-10 text-white text-5xl cursor-pointer hover:rotate-90 transition-transform">&times;</div>
         <img src="" alt="Ampliar Imagem" id="lightbox-img" class="max-w-[90%] max-h-[85vh] rounded-2xl shadow-2xl transition-transform duration-500 scale-90">
     </div>
 
@@ -252,14 +263,15 @@
         <div class="tracking-tighter font-title">
             <span class="brand-name" id="brandName">Vinicius Medeiros</span>
         </div>
-        <div class="space-x-8 hidden md:flex">
+        <div class="space-x-8 hidden lg:flex">
             <a href="#sobre" class="nav-item">Sobre</a>
             <a href="#experiencia" class="nav-item">Experiência</a>
             <a href="#projetos" class="nav-item">Projetos</a>
+            <a href="#posters" class="nav-item">Posters</a>
             <a href="#marketing" class="nav-item">Social Media</a>
             <a href="#contato" class="nav-item">Contato</a>
         </div>
-        <button class="md:hidden" id="menuToggle">
+        <button class="lg:hidden" id="menuToggle">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16"></path></svg>
         </button>
     </nav>
@@ -373,21 +385,93 @@
         </div>
     </section>
 
+    <!-- NOVA SEÇÃO: POSTER DESIGN -->
+    <section id="posters" class="py-40 px-6 md:px-20 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-24">
+                <div class="reveal">
+                    <h2 class="text-5xl md:text-7xl font-light mb-4">Poster Design</h2>
+                    <p class="text-gray-400 text-lg">Explorações Visuais & Editorial</p>
+                </div>
+                <div class="reveal stagger-1 text-right hidden md:block">
+                    <span class="text-[10px] font-bold uppercase tracking-[0.2em] py-2 px-4 border border-black/10 rounded-full">Digital & Print</span>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
+                <!-- Cartaz 1 -->
+                <div class="poster-trigger reveal stagger-1">
+                    <div class="image-card poster-card mb-4 group cursor-pointer">
+                        <img src="images/poster1.png" alt="Poster iPhone 17 Pro" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    </div>
+                </div>
+                <!-- Cartaz 2 -->
+                <div class="poster-trigger reveal stagger-2">
+                    <div class="image-card poster-card mb-4 group cursor-pointer">
+                        <img src="images/poster2.png" alt="Melancolia Memento Mori" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    </div>
+                </div>
+                <!-- Cartaz 3 -->
+                <div class="poster-trigger reveal stagger-3">
+                    <div class="image-card poster-card mb-4 group cursor-pointer">
+                        <img src="images/poster3.png" alt="Sketch Nimbo" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    </div>
+                </div>
+                <!-- Cartaz 4 -->
+                <div class="poster-trigger reveal stagger-1">
+                    <div class="image-card poster-card mb-4 group cursor-pointer">
+                        <img src="images/poster4.png" alt="Oferta Bebidas" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    </div>
+                </div>
+                <!-- Cartaz 5 -->
+                <div class="poster-trigger reveal stagger-2">
+                    <div class="image-card poster-card mb-4 group cursor-pointer">
+                        <img src="images/poster5.png" alt="Hot Dog Poster" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    </div>
+                </div>
+                <!-- Cartaz 6 -->
+                <div class="poster-trigger reveal stagger-3">
+                    <div class="image-card poster-card mb-4 group cursor-pointer">
+                        <img src="images/poster6.png" alt="Motorola Razr v9" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    </div>
+                </div>
+                <!-- Cartaz 7 -->
+                <div class="poster-trigger reveal stagger-1">
+                    <div class="image-card poster-card mb-4 group cursor-pointer">
+                        <img src="images/poster7.png" alt="Nautico Restaurante" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    </div>
+                </div>
+                <!-- Cartaz 8 -->
+                <div class="poster-trigger reveal stagger-2">
+                    <div class="image-card poster-card mb-4 group cursor-pointer">
+                        <img src="images/poster8.png" alt="Você está acordado?" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    </div>
+                </div>
+                <!-- Cartaz 9 -->
+                <div class="poster-trigger reveal stagger-3">
+                    <div class="image-card poster-card mb-4 group cursor-pointer">
+                        <img src="images/poster9.png" alt="Raw Form Workshop" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Social Media -->
     <section id="marketing" class="py-32 px-6 md:px-20 bg-[#F3F4F6]">
         <div class="max-w-7xl mx-auto">
             <h2 class="text-5xl md:text-7xl font-light reveal mb-16">Social Media</h2>
             <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-20">
-                <div class="aspect-[9/16] image-card shadow-md reveal stagger-1 story-trigger"><img src="images/story1.jpg" class="w-full h-full object-cover"></div>
-                <div class="aspect-[9/16] image-card shadow-md reveal stagger-2 story-trigger"><img src="images/story2.jpg" class="w-full h-full object-cover"></div>
-                <div class="aspect-[9/16] image-card shadow-md reveal stagger-3 story-trigger"><img src="images/story3.jpg" class="w-full h-full object-cover"></div>
-                <div class="aspect-[9/16] image-card shadow-md reveal stagger-1 story-trigger"><img src="images/story4.jpg" class="w-full h-full object-cover"></div>
-                <div class="aspect-[9/16] image-card shadow-md reveal stagger-2 story-trigger"><img src="images/story5.jpg" class="w-full h-full object-cover"></div>
+                <div class="aspect-[9/16] image-card shadow-md reveal stagger-1 poster-trigger cursor-pointer"><img src="images/story1.jpg" class="w-full h-full object-cover"></div>
+                <div class="aspect-[9/16] image-card shadow-md reveal stagger-2 poster-trigger cursor-pointer"><img src="images/story2.jpg" class="w-full h-full object-cover"></div>
+                <div class="aspect-[9/16] image-card shadow-md reveal stagger-3 poster-trigger cursor-pointer"><img src="images/story3.jpg" class="w-full h-full object-cover"></div>
+                <div class="aspect-[9/16] image-card shadow-md reveal stagger-1 poster-trigger cursor-pointer"><img src="images/story4.jpg" class="w-full h-full object-cover"></div>
+                <div class="aspect-[9/16] image-card shadow-md reveal stagger-2 poster-trigger cursor-pointer"><img src="images/story5.jpg" class="w-full h-full object-cover"></div>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="aspect-[4/5] image-card shadow-lg reveal stagger-1 story-trigger"><img src="images/post1.jpg" class="w-full h-full object-cover"></div>
-                <div class="aspect-[4/5] image-card shadow-lg reveal stagger-2 story-trigger"><img src="images/post2.jpg" class="w-full h-full object-cover"></div>
-                <div class="aspect-[4/5] image-card shadow-lg reveal stagger-3 story-trigger"><img src="images/post3.jpg" class="w-full h-full object-cover"></div>
+                <div class="aspect-[4/5] image-card shadow-lg reveal stagger-1 poster-trigger cursor-pointer"><img src="images/post1.jpg" class="w-full h-full object-cover"></div>
+                <div class="aspect-[4/5] image-card shadow-lg reveal stagger-2 poster-trigger cursor-pointer"><img src="images/post2.jpg" class="w-full h-full object-cover"></div>
+                <div class="aspect-[4/5] image-card shadow-lg reveal stagger-3 poster-trigger cursor-pointer"><img src="images/post3.jpg" class="w-full h-full object-cover"></div>
             </div>
         </div>
     </section>
@@ -485,7 +569,8 @@
             document.querySelectorAll(".reveal").forEach(el => {
                 const rect = el.getBoundingClientRect();
                 if (rect.top < window.innerHeight - 100 && rect.bottom > 0) el.classList.add("active");
-                else el.classList.remove("active");
+                // Removido o else para as animações acontecerem apenas uma vez ao descer, 
+                // ou mantido se preferir que reiniciem.
             });
         }
         window.addEventListener("scroll", reveal);
@@ -493,16 +578,29 @@
 
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightbox-img');
-        document.querySelectorAll('.story-trigger').forEach(trigger => {
+        
+        // Unificando o trigger para Posters e Social Media
+        document.querySelectorAll('.poster-trigger').forEach(trigger => {
             trigger.addEventListener('click', () => {
-                lightboxImg.src = trigger.querySelector('img').src;
+                const imgSrc = trigger.querySelector('img').src;
+                lightboxImg.src = imgSrc;
                 lightbox.classList.add('active');
                 document.body.style.overflow = 'hidden';
             });
         });
-        const closeLB = () => { lightbox.classList.remove('active'); document.body.style.overflow = 'auto'; };
-        lightbox.addEventListener('click', (e) => { if(e.target !== lightboxImg) closeLB(); });
-        document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeLB(); });
+
+        const closeLB = () => { 
+            lightbox.classList.remove('active'); 
+            document.body.style.overflow = 'auto'; 
+        };
+
+        lightbox.addEventListener('click', (e) => { 
+            if(e.target !== lightboxImg) closeLB(); 
+        });
+
+        document.addEventListener('keydown', (e) => { 
+            if(e.key === 'Escape') closeLB(); 
+        });
     </script>
 </body>
 </html>
