@@ -234,11 +234,9 @@
         /* Efeito B&W exclusivo para Social Media no DESKTOP */
         .social-img-container img {
             transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1), filter 0.5s ease;
-            /* No mobile as cores originais aparecem por padrão */
         }
         
         @media (min-width: 1024px) {
-            /* No desktop, aplica preto e branco por padrão e revela no hover */
             .social-img-container img {
                 filter: grayscale(100%);
             }
@@ -276,10 +274,9 @@
 
         @media (min-width: 1024px) { .tool-card:hover .tool-name::after { width: 100%; } }
 
-        /* Animação Panorâmica para imagens do Hero no Mobile */
         @keyframes panImage {
             0% { transform: translateY(0); }
-            50% { transform: translateY(calc(-100% + 20vh)); } /* Sobe até o limite inferior da imagem */
+            50% { transform: translateY(calc(-100% + 20vh)); } 
             100% { transform: translateY(0); }
         }
 
@@ -317,7 +314,6 @@
     <div id="cursor-box"></div>
 
     <div class="preview-container" id="preview-container">
-        <!-- As imagens do preview são carregadas imediatamente para estarem prontas no hover -->
         <img src="images/projeto3.jpg" class="preview-image" id="img-projetos" onerror="this.src='https://placehold.co/800x1200/ececec/1a1a1a?text=Projetos'">
         <img src="images/story3.jpg" class="preview-image" id="img-social" onerror="this.src='https://placehold.co/800x1200/ececec/1a1a1a?text=Social'">
         <img src="images/poster4.png" class="preview-image" id="img-arquivo" onerror="this.src='https://placehold.co/800x1200/ececec/1a1a1a?text=Posters'">
@@ -342,40 +338,34 @@
         <div class="max-w-screen-2xl mx-auto w-full overflow-hidden">
             <div class="reveal active flex flex-col items-start gap-12 md:gap-2 mt-10 md:mt-0">
                 
-                <!-- Item 1: Projetos -->
                 <div class="w-full md:w-auto">
                     <div class="title-huge">
                         <a href="#projetos" class="hero-link-item" onmouseenter="showPreview('projetos')" onmouseleave="hidePreview()">
                             <span class="number">1</span>PROJETOS —
                         </a>
                     </div>
-                    <!-- Imagem apenas Mobile com efeito Pan -->
                     <a href="#projetos" class="md:hidden block mt-4 w-full h-[20vh] mobile-hero-img-container opacity-90 shadow-lg">
                         <img src="images/projeto3.jpg" onerror="this.src='https://placehold.co/800x1200/d4d4d4/1a1a1a?text=Projetos'">
                     </a>
                 </div>
 
-                <!-- Item 2: Social Media -->
                 <div class="w-full md:w-auto">
                     <div class="title-huge">
                         <a href="#social" class="hero-link-item" onmouseenter="showPreview('social')" onmouseleave="hidePreview()">
                             <span class="number">2</span> FEED —
                         </a>
                     </div>
-                    <!-- Imagem apenas Mobile com efeito Pan -->
                     <a href="#social" class="md:hidden block mt-4 w-full h-[20vh] mobile-hero-img-container opacity-90 shadow-lg">
                         <img src="images/story3.jpg" onerror="this.src='https://placehold.co/800x1200/d4d4d4/1a1a1a?text=Social+Media'">
                     </a>
                 </div>
 
-                <!-- Item 3: Arquivo -->
                 <div class="w-full md:w-auto">
                     <div class="title-huge">
                         <a href="#arquivo" class="hero-link-item" onmouseenter="showPreview('arquivo')" onmouseleave="hidePreview()">
                             <span class="number">3</span> GALERIA —
                         </a>
                     </div>
-                    <!-- Imagem apenas Mobile com efeito Pan -->
                     <a href="#arquivo" class="md:hidden block mt-4 w-full h-[20vh] mobile-hero-img-container opacity-90 shadow-lg">
                         <img src="images/poster4.png" onerror="this.src='https://placehold.co/800x1200/d4d4d4/1a1a1a?text=Posters'">
                     </a>
@@ -387,13 +377,10 @@
 
     <!-- Editorial Image (Parallax) -->
     <section class="pb-20 w-full">
-        <!-- Container Full Width para a Imagem -->
         <div class="w-full h-[60vh] md:h-[80vh] img-container reveal" id="parallax-container" style="overflow: hidden;">
-            <!-- A imagem editorial carrega rápido pois está no topo -->
             <img src="images/hero.jpg" alt="Processo Criativo" id="parallax-img" class="w-full h-[140%] object-cover object-top will-change-transform" onerror="this.src='https://placehold.co/1920x1080/d4d4d4/1a1a1a?text=Editorial+Image'">
         </div>
         
-        <!-- Textos abaixo da imagem, mantendo o limite de largura -->
         <div class="max-w-screen-2xl mx-auto px-6 md:px-16">
             <div class="mt-8 flex flex-col md:flex-row justify-between items-start reveal gap-4 border-b border-black/10 pb-8">
                 <span class="text-[9px] font-black uppercase tracking-[0.5em] text-black opacity-50">Ref: 088 — Ensaio</span>
@@ -420,81 +407,71 @@
 
     <!-- PROJETOS - Horizontal Scroll -->
     <section id="projetos" class="relative h-[400vh]">
-        <!-- Ajuste na altura do sticky para centralizar melhor os cards menores -->
-        <div class="sticky top-0 h-screen flex flex-col justify-center overflow-hidden bg-[var(--bg)] z-10 py-10 md:py-16">
-            <div class="w-full max-w-screen-2xl mx-auto px-6 md:px-16 mb-6 md:mb-10 reveal">
-                <h2 class="text-[10px] font-black uppercase tracking-[0.5em] opacity-50 mb-4">Portfólio Selecionado</h2>
-                <h3 class="title-huge text-5xl md:text-7xl">Principais <br><span class="serif-italic">PROJETOS</span></h3>
+        <div class="sticky top-0 h-screen flex flex-col justify-center overflow-hidden bg-[var(--bg)] z-10 py-6 md:py-10">
+            <div class="w-full max-w-screen-2xl mx-auto px-6 md:px-16 mb-4 md:mb-8 reveal">
+                <h2 class="text-[10px] font-black uppercase tracking-[0.5em] opacity-50 mb-3">Portfólio Selecionado</h2>
+                <h3 class="title-huge text-4xl md:text-6xl">Principais <br><span class="serif-italic">PROJETOS</span></h3>
             </div>
 
-            <!-- Slider Container -->
-            <!-- Ajuste de margin-bottom (mb-8) no track para elevar os cards e garantir clique nos botões -->
-            <div id="projetos-track" class="flex gap-6 md:gap-8 px-6 md:px-16 w-max will-change-transform mb-8">
+            <div id="projetos-track" class="flex gap-6 md:gap-8 px-6 md:px-16 w-max will-change-transform mb-4">
                 
-                <!-- Projeto 01 -->
-                <!-- Redução da altura máxima (max-h-[60vh] por exemplo, ou padding inferior) gerida pelo flex -->
-                <div class="w-[85vw] md:w-[35vw] lg:w-[28vw] shrink-0 flex flex-col group pb-8">
-                    <!-- Lazy loading aplicado -->
-                    <a href="https://www.behance.net/gallery/251451981/Nautico-Branding-Seafood-Restaurant" target="_blank" class="block w-full aspect-square img-container mb-6">
+                <div class="w-[85vw] md:w-[32vw] lg:w-[24vw] shrink-0 flex flex-col group pb-2">
+                    <a href="https://www.behance.net/gallery/251451981/Nautico-Branding-Seafood-Restaurant" target="_blank" class="block w-full aspect-square img-container mb-4">
                         <img src="images/projeto4.png" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/800x800/d4d4d4/1a1a1a?text=N%C3%A1utico+Restaurante'">
                     </a>
-                    <span class="text-[9px] font-black uppercase tracking-[0.4em] mb-3 opacity-40">01 / Brand Identity & Web</span>
-                    <h3 class="serif-italic text-3xl md:text-4xl mb-3 leading-tight">Náutico Restaurante</h3>
-                    <p class="font-sans text-sm md:text-base opacity-70 mb-6 font-light leading-relaxed flex-grow">Identidade visual marcante e desenvolvimento web para um restaurante sofisticado especializado em frutos do mar.</p>
+                    <span class="text-[9px] font-black uppercase tracking-[0.4em] mb-2 opacity-40">01 / Brand Identity & Web</span>
+                    <h3 class="serif-italic text-2xl md:text-3xl mb-2 leading-tight">Náutico Restaurante</h3>
+                    <p class="font-sans text-xs md:text-sm opacity-70 mb-4 font-light leading-relaxed flex-grow">Identidade visual marcante e desenvolvimento web para um restaurante sofisticado especializado em frutos do mar.</p>
                     <div class="flex flex-wrap gap-4 mt-auto">
                         <a href="https://www.behance.net/gallery/251451981/Nautico-Branding-Seafood-Restaurant" target="_blank" class="btn-editorial">Explorar Projeto +</a>
                         <a href="https://rviniciusm.github.io/Nautico-restaurante/" target="_blank" class="btn-editorial">Ver Site Real +</a>
                     </div>
                 </div>
 
-                <!-- Projeto 02 -->
-                <div class="w-[85vw] md:w-[35vw] lg:w-[28vw] shrink-0 flex flex-col group pb-8">
-                    <a href="https://www.behance.net/gallery/247057833/Tracos-e-Memorias-UIUX-Design-Narrative-Design" target="_blank" class="block w-full aspect-square img-container mb-6">
+                <div class="w-[85vw] md:w-[32vw] lg:w-[24vw] shrink-0 flex flex-col group pb-2">
+                    <a href="https://www.behance.net/gallery/247057833/Tracos-e-Memorias-UIUX-Design-Narrative-Design" target="_blank" class="block w-full aspect-square img-container mb-4">
                         <img src="images/projeto1.jpg" loading="lazy" class="w-full h-full object-cover object-top" onerror="this.src='https://placehold.co/800x800/d4d4d4/1a1a1a?text=Tra%C3%A7os+%26+Mem%C3%B3rias'">
                     </a>
-                    <span class="text-[9px] font-black uppercase tracking-[0.4em] mb-3 opacity-40">02 / UI/UX & Narrative Design</span>
-                    <h3 class="serif-italic text-3xl md:text-4xl mb-3 leading-tight">Traços & Memórias</h3>
-                    <p class="font-sans text-sm md:text-base opacity-70 mb-6 font-light leading-relaxed flex-grow">Narrativas visuais imersivas que preservam a cultura através do design digital cuidadoso e tipografia expressiva.</p>
+                    <span class="text-[9px] font-black uppercase tracking-[0.4em] mb-2 opacity-40">02 / UI/UX & Narrative Design</span>
+                    <h3 class="serif-italic text-2xl md:text-3xl mb-2 leading-tight">Traços & Memórias</h3>
+                    <p class="font-sans text-xs md:text-sm opacity-70 mb-4 font-light leading-relaxed flex-grow">Narrativas visuais imersivas que preservam a cultura através do design digital cuidadoso e tipografia expressiva.</p>
                     <div class="flex flex-wrap gap-4 mt-auto">
                         <a href="https://www.behance.net/gallery/247057833/Tracos-e-Memorias-UIUX-Design-Narrative-Design" target="_blank" class="btn-editorial">Explorar Projeto +</a>
                         <a href="https://rviniciusm.github.io/tracos-e-memorias-tcc/" target="_blank" class="btn-editorial">Ver Site Real +</a>
                     </div>
                 </div>
 
-                <!-- Projeto 03 -->
-                <div class="w-[85vw] md:w-[35vw] lg:w-[28vw] shrink-0 flex flex-col group pb-8">
-                    <a href="https://rviniciusm.github.io/portfolio-erisom/" target="_blank" class="block w-full aspect-square img-container mb-6">
-                        <img src="images/erisom.jpg" loading="lazy" class="w-full h-full object-cover object-center" onerror="this.src='https://placehold.co/800x800/d4d4d4/1a1a1a?text=Erisom+Fotografia'">
+                <div class="w-[85vw] md:w-[32vw] lg:w-[24vw] shrink-0 flex flex-col group pb-2">
+                    <a href="https://rviniciusm.github.io/portfolio-erisom/" target="_blank" class="block w-full aspect-square img-container mb-4">
+                        <img src="images/erisom77.png" loading="lazy" class="w-full h-full object-cover object-center" onerror="this.src='https://placehold.co/800x800/d4d4d4/1a1a1a?text=Erisom+Fotografia'">
                     </a>
-                    <span class="text-[9px] font-black uppercase tracking-[0.4em] mb-3 opacity-40">03 / Web Design & Fotografia</span>
-                    <h3 class="serif-italic text-3xl md:text-4xl mb-3 leading-tight">Erisom Portfolio</h3>
-                    <p class="font-sans text-sm md:text-base opacity-70 mb-6 font-light leading-relaxed flex-grow">Design elegante e minimalista desenvolvido para dar destaque às obras e a sensibilidade de um fotógrafo profissional.</p>
+                    <span class="text-[9px] font-black uppercase tracking-[0.4em] mb-2 opacity-40">03 / Web Design & Fotografia</span>
+                    <h3 class="serif-italic text-2xl md:text-3xl mb-2 leading-tight">Erisom Portfolio</h3>
+                    <p class="font-sans text-xs md:text-sm opacity-70 mb-4 font-light leading-relaxed flex-grow">Design elegante e minimalista desenvolvido para dar destaque às obras e a sensibilidade de um fotógrafo profissional.</p>
                     <div class="flex flex-wrap gap-4 mt-auto">
                         <a href="https://rviniciusm.github.io/portfolio-erisom/" target="_blank" class="btn-editorial">Ver Site Real +</a>
                     </div>
                 </div>
 
-                <!-- Projeto 04 -->
-                <div class="w-[85vw] md:w-[35vw] lg:w-[28vw] shrink-0 flex flex-col group pb-8">
-                    <a href="https://www.behance.net/gallery/219407775/Definido-GYM-Mobile-App-UIUX-Design" target="_blank" class="block w-full aspect-square img-container mb-6">
+                <div class="w-[85vw] md:w-[32vw] lg:w-[24vw] shrink-0 flex flex-col group pb-2">
+                    <a href="https://www.behance.net/gallery/219407775/Definido-GYM-Mobile-App-UIUX-Design" target="_blank" class="block w-full aspect-square img-container mb-4">
                         <img src="images/projeto2.jpg" loading="lazy" class="w-full h-full object-cover object-center" onerror="this.src='https://placehold.co/800x800/d4d4d4/1a1a1a?text=%2BDefinido+App'">
                     </a>
-                    <span class="text-[9px] font-black uppercase tracking-[0.4em] mb-3 opacity-40">04 / Mobile App UI</span>
-                    <h3 class="serif-italic text-3xl md:text-4xl mb-3 leading-tight">+Definido App</h3>
-                    <p class="font-sans text-sm md:text-base opacity-70 mb-6 font-light leading-relaxed flex-grow">A precisão técnica e usabilidade aplicada ao acompanhamento diário de performance e rotina atlética.</p>
+                    <span class="text-[9px] font-black uppercase tracking-[0.4em] mb-2 opacity-40">04 / Mobile App UI</span>
+                    <h3 class="serif-italic text-2xl md:text-3xl mb-2 leading-tight">+Definido App</h3>
+                    <p class="font-sans text-xs md:text-sm opacity-70 mb-4 font-light leading-relaxed flex-grow">A precisão técnica e usabilidade aplicada ao acompanhamento diário de performance e rotina atlética.</p>
                     <div class="flex flex-wrap gap-4 mt-auto">
                         <a href="https://www.behance.net/gallery/219407775/Definido-GYM-Mobile-App-UIUX-Design" target="_blank" class="btn-editorial">Explorar Projeto +</a>
                     </div>
                 </div>
 
-                <!-- Projeto 05 -->
-                <div class="w-[85vw] md:w-[35vw] lg:w-[28vw] shrink-0 flex flex-col group pb-8">
-                    <a href="https://www.behance.net/gallery/219370645/NIMBO-coffee-bakeryBrand-Identity" target="_blank" class="block w-full aspect-square img-container mb-6">
+                <div class="w-[85vw] md:w-[32vw] lg:w-[24vw] shrink-0 flex flex-col group pb-2">
+                    <a href="https://www.behance.net/gallery/219370645/NIMBO-coffee-bakeryBrand-Identity" target="_blank" class="block w-full aspect-square img-container mb-4">
                         <img src="images/projeto3.jpg" loading="lazy" class="w-full h-full object-cover object-center" onerror="this.src='https://placehold.co/800x800/d4d4d4/1a1a1a?text=Nimbo+Bakery'">
                     </a>
-                    <span class="text-[9px] font-black uppercase tracking-[0.4em] mb-3 opacity-40">05 / Brand Identity</span>
-                    <h3 class="serif-italic text-3xl md:text-4xl mb-3 leading-tight">Nimbo Bakery</h3>
-                    <p class="font-sans text-sm md:text-base opacity-70 mb-6 font-light leading-relaxed flex-grow">Identidade visual divertida que une o carinho do trabalho artesanal à leveza de uma padaria contemporânea.</p>
+                    <span class="text-[9px] font-black uppercase tracking-[0.4em] mb-2 opacity-40">05 / Brand Identity</span>
+                    <h3 class="serif-italic text-2xl md:text-3xl mb-2 leading-tight">Nimbo Bakery</h3>
+                    <p class="font-sans text-xs md:text-sm opacity-70 mb-4 font-light leading-relaxed flex-grow">Identidade visual divertida que une o carinho do trabalho artesanal à leveza de uma padaria contemporânea.</p>
                     <div class="flex flex-wrap gap-4 mt-auto">
                         <a href="https://www.behance.net/gallery/219370645/NIMBO-coffee-bakeryBrand-Identity" target="_blank" class="btn-editorial">Explorar Projeto +</a>
                     </div>
@@ -556,17 +533,17 @@
     <!-- Social Media (Stories Carousel H-Scroll) -->
     <section id="social" class="relative h-[300vh] bg-[#dfdfdf]">
         <div class="sticky top-0 h-screen flex flex-col justify-center overflow-hidden z-10 py-10">
-            <div class="max-w-screen-2xl mx-auto px-6 md:px-16 w-full mb-8 md:mb-12 reveal">
-                <h2 class="title-huge text-5xl md:text-7xl mb-2 whitespace-normal">OK INTERCÂMBIO</h2>
-                <p class="serif-italic text-3xl md:text-4xl opacity-70">Social Media & Conteúdo</p>
+            <div class="max-w-screen-2xl mx-auto px-6 md:px-16 w-full mb-6 md:mb-10 reveal">
+                <h2 class="title-huge text-4xl md:text-6xl mb-2 whitespace-normal">OK INTERCÂMBIO</h2>
+                <p class="serif-italic text-2xl md:text-3xl opacity-70">Social Media & Conteúdo</p>
             </div>
             
             <div id="social-track" class="flex gap-4 px-6 md:px-16 w-max will-change-transform">
-                <div class="w-[70vw] md:w-[22vw] shrink-0 aspect-[9/16] img-container social-img-container"><img src="images/story1.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x711/c0c0c0/1a1a1a?text=Story'"></div>
-                <div class="w-[70vw] md:w-[22vw] shrink-0 aspect-[9/16] img-container social-img-container"><img src="images/story2.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x711/c0c0c0/1a1a1a?text=Story'"></div>
-                <div class="w-[70vw] md:w-[22vw] shrink-0 aspect-[9/16] img-container social-img-container"><img src="images/story3.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x711/c0c0c0/1a1a1a?text=Story'"></div>
-                <div class="w-[70vw] md:w-[22vw] shrink-0 aspect-[9/16] img-container social-img-container"><img src="images/story4.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x711/c0c0c0/1a1a1a?text=Story'"></div>
-                <div class="w-[70vw] md:w-[22vw] shrink-0 aspect-[9/16] img-container social-img-container"><img src="images/story5.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x711/c0c0c0/1a1a1a?text=Story'"></div>
+                <div class="w-[85vw] md:w-[18vw] shrink-0 aspect-[9/16] img-container social-img-container"><img src="images/story1.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x711/c0c0c0/1a1a1a?text=Story'"></div>
+                <div class="w-[85vw] md:w-[18vw] shrink-0 aspect-[9/16] img-container social-img-container"><img src="images/story2.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x711/c0c0c0/1a1a1a?text=Story'"></div>
+                <div class="w-[85vw] md:w-[18vw] shrink-0 aspect-[9/16] img-container social-img-container"><img src="images/story3.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x711/c0c0c0/1a1a1a?text=Story'"></div>
+                <div class="w-[85vw] md:w-[18vw] shrink-0 aspect-[9/16] img-container social-img-container"><img src="images/story4.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x711/c0c0c0/1a1a1a?text=Story'"></div>
+                <div class="w-[85vw] md:w-[18vw] shrink-0 aspect-[9/16] img-container social-img-container"><img src="images/story5.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x711/c0c0c0/1a1a1a?text=Story'"></div>
             </div>
         </div>
     </section>
@@ -574,9 +551,9 @@
     <!-- Social Media (Posts Static Grid) -->
     <section class="py-20 bg-[#dfdfdf]">
         <div class="max-w-screen-2xl mx-auto px-6 md:px-16 flex flex-col md:grid md:grid-cols-3 gap-6 md:gap-8 reveal">
-            <div class="w-full aspect-square md:aspect-[4/5] img-container social-img-container"><img src="images/post1.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/800x1000/c0c0c0/1a1a1a?text=Post'"></div>
-            <div class="w-full aspect-square md:aspect-[4/5] img-container social-img-container"><img src="images/post2.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/800x1000/c0c0c0/1a1a1a?text=Post'"></div>
-            <div class="w-full aspect-square md:aspect-[4/5] img-container social-img-container"><img src="images/post3.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/800x1000/c0c0c0/1a1a1a?text=Post'"></div>
+            <div class="w-full aspect-[4/5] img-container social-img-container"><img src="images/post1.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/800x1000/c0c0c0/1a1a1a?text=Post'"></div>
+            <div class="w-full aspect-[4/5] img-container social-img-container"><img src="images/post2.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/800x1000/c0c0c0/1a1a1a?text=Post'"></div>
+            <div class="w-full aspect-[4/5] img-container social-img-container"><img src="images/post3.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/800x1000/c0c0c0/1a1a1a?text=Post'"></div>
         </div>
     </section>
 
@@ -660,9 +637,6 @@
     </footer>
 
     <script>
-        // --- Lógica do Preloader (Espera carregar imagens INICIAIS apenas) ---
-        // Alterado de volta para um simples load event. Como aplicamos loading="lazy" nas outras imagens,
-        // o preloader só vai esperar as imagens hero e as do preview carregarem, deixando o site ultra rápido.
         window.addEventListener('load', () => {
             const preloader = document.getElementById('preloader');
             if (preloader) {
@@ -671,8 +645,6 @@
             }
         });
 
-
-        // Lógica de Preview de Imagem (Apenas Desktop)
         const previewContainer = document.getElementById('preview-container');
         const previewImages = document.querySelectorAll('.preview-image');
 
@@ -686,7 +658,6 @@
         }
         function hidePreview() { previewContainer.classList.remove('active'); }
 
-        // Cursor Customizado
         const cursor = document.getElementById('cursor-box');
         let mX = 0, mY = 0;
         document.addEventListener('mousemove', (e) => {
@@ -694,23 +665,17 @@
             cursor.style.transform = `translate(${mX - 6}px, ${mY - 6}px)`;
         });
 
-        // Hover Lens - Apenas Desktop
         document.querySelectorAll('a, .hero-link-item, .exp-row, .tool-card').forEach(el => {
             el.addEventListener('mouseenter', () => {
                 if (window.innerWidth > 1024) {
                     cursor.style.transform += ' scale(5)';
-                    cursor.style.mixBlendMode = 'difference';
-                    cursor.style.background = '#ECECEC';
                 }
             });
             el.addEventListener('mouseleave', () => {
-                cursor.style.background = 'var(--neon)';
-                cursor.style.mixBlendMode = 'normal';
                 cursor.style.transform = cursor.style.transform.replace(' scale(5)', '');
             });
         });
 
-        // Intersection Observer (Animações Reveal)
         const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(e => { 
@@ -724,7 +689,6 @@
         let isTicking = false;
 
         function handleScrollAnimations() {
-            // 1. Lógica do Parallax na Imagem Editorial APRIMORADA
             const parallaxContainer = document.getElementById('parallax-container');
             const parallaxImg = document.getElementById('parallax-img');
             
@@ -734,18 +698,12 @@
                 
                 if (rect.top <= windowHeight && rect.bottom >= 0) {
                     const scrollPercent = (windowHeight - rect.top) / (windowHeight + rect.height);
-                    
                     const yMove = -(scrollPercent * 30); 
-                    
-                    if (window.innerWidth > 1024) {
-                        parallaxImg.style.transition = 'none'; 
-                    }
-                    
+                    if (window.innerWidth > 1024) parallaxImg.style.transition = 'none'; 
                     parallaxImg.style.transform = `translateY(${yMove}%)`;
                 }
             }
 
-            // 2. Lógica dos Carrosséis Horizontais (Projetos e Social)
             const calcProgress = (sectionElement) => {
                 const rect = sectionElement.getBoundingClientRect();
                 const scrollDistance = sectionElement.offsetHeight - window.innerHeight;
@@ -755,7 +713,6 @@
 
             const paddingRight = window.innerWidth > 768 ? 64 : 24;
 
-            // Projetos Scroll
             const projetosSection = document.getElementById('projetos');
             const projetosTrack = document.getElementById('projetos-track');
             if (projetosSection && projetosTrack) {
@@ -764,7 +721,6 @@
                 projetosTrack.style.transform = `translate3d(${-prog1 * maxScroll1}px, 0, 0)`;
             }
 
-            // Social Media Scroll
             const socialSection = document.getElementById('social');
             const socialTrack = document.getElementById('social-track');
             if (socialSection && socialTrack) {
