@@ -90,8 +90,6 @@
             100% { transform: scaleX(0); transform-origin: right; }
         }
 
-        /* --- Fim Estilos do Preloader --- */
-
         .title-huge {
             font-weight: 900;
             line-height: 0.9; 
@@ -229,21 +227,6 @@
 
         @media (min-width: 1024px) {
             .img-container:hover img { transform: scale(1.03); }
-        }
-
-        /* Efeito B&W exclusivo para Social Media no DESKTOP */
-        .social-img-container img {
-            transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1), filter 0.5s ease;
-        }
-        
-        @media (min-width: 1024px) {
-            .social-img-container img {
-                filter: grayscale(100%);
-            }
-            .social-img-container:hover img {
-                filter: grayscale(0%);
-                transform: scale(1.03);
-            }
         }
 
         .btn-editorial {
@@ -413,7 +396,7 @@
                 <h3 class="title-huge text-4xl md:text-6xl">Principais <br><span class="serif-italic">PROJETOS</span></h3>
             </div>
 
-            <div id="projetos-track" class="flex gap-6 md:gap-8 px-6 md:px-16 w-max will-change-transform mb-4">
+            <div id="projetos-track" class="flex gap-6 md:gap-8 px-6 md:px-16 w-max will-change-transform mb-4 items-start">
                 
                 <div class="w-[85vw] md:w-[32vw] lg:w-[24vw] shrink-0 flex flex-col group pb-2">
                     <a href="https://www.behance.net/gallery/251451981/Nautico-Branding-Seafood-Restaurant" target="_blank" class="block w-full aspect-square img-container mb-4">
@@ -530,30 +513,98 @@
         </div>
     </section>
 
-    <!-- Social Media (Stories Carousel H-Scroll) -->
-    <section id="social" class="relative h-[300vh] bg-[#dfdfdf]">
+    <!-- MULTI-CLIENT SOCIAL MEDIA (Sticky Horizontal Scroll) -->
+    <section id="social" class="relative h-[600vh] bg-[#dfdfdf]">
         <div class="sticky top-0 h-screen flex flex-col justify-center overflow-hidden z-10 py-10">
+            
             <div class="max-w-screen-2xl mx-auto px-6 md:px-16 w-full mb-6 md:mb-10 reveal">
-                <h2 class="title-huge text-4xl md:text-6xl mb-2 whitespace-normal">OK INTERCÂMBIO</h2>
-                <p class="serif-italic text-2xl md:text-3xl opacity-70">Social Media & Conteúdo</p>
+                <h2 class="title-huge text-4xl md:text-6xl mb-2 whitespace-normal">SOCIAL MEDIA</h2>
+                <p class="serif-italic text-2xl md:text-3xl opacity-70">Estratégia & Conteúdo Digital</p>
             </div>
             
-            <div id="social-track" class="flex gap-4 px-6 md:px-16 w-max will-change-transform">
-                <div class="w-[85vw] md:w-[18vw] shrink-0 aspect-[9/16] img-container social-img-container"><img src="images/story1.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x711/c0c0c0/1a1a1a?text=Story'"></div>
-                <div class="w-[85vw] md:w-[18vw] shrink-0 aspect-[9/16] img-container social-img-container"><img src="images/story2.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x711/c0c0c0/1a1a1a?text=Story'"></div>
-                <div class="w-[85vw] md:w-[18vw] shrink-0 aspect-[9/16] img-container social-img-container"><img src="images/story3.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x711/c0c0c0/1a1a1a?text=Story'"></div>
-                <div class="w-[85vw] md:w-[18vw] shrink-0 aspect-[9/16] img-container social-img-container"><img src="images/story4.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x711/c0c0c0/1a1a1a?text=Story'"></div>
-                <div class="w-[85vw] md:w-[18vw] shrink-0 aspect-[9/16] img-container social-img-container"><img src="images/story5.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x711/c0c0c0/1a1a1a?text=Story'"></div>
-            </div>
-        </div>
-    </section>
+            <div id="social-track" class="flex gap-4 md:gap-8 px-6 md:px-16 w-max will-change-transform items-center">
+                
+                <!-- ====== 1. MANSIONS CONSTRUTORA ====== -->
+                <div class="w-[80vw] md:w-[22vw] shrink-0 flex flex-col gap-2 border-l-4 border-[var(--neon)] pl-4 md:pl-6 mr-2 md:mr-4">
+                    <h3 class="font-sans font-black text-2xl md:text-4xl uppercase tracking-tighter">Mansions</h3>
+                    <span class="text-[10px] uppercase tracking-widest opacity-60">Construção Civil</span>
+                </div>
+                <!-- Reels -->
+                <div class="w-[75vw] md:w-[18vw] shrink-0 aspect-[9/16] img-container shadow-lg"><img src="images/Instagram story - 6.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x711/c0c0c0/1a1a1a?text=Reels'"></div>
+                <div class="w-[75vw] md:w-[18vw] shrink-0 aspect-[9/16] img-container shadow-lg"><img src="images/Instagram story - 7.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x711/c0c0c0/1a1a1a?text=Reels'"></div>
+                <!-- Carrossel (Agrupado para ficar colado) -->
+                <div class="flex gap-1 shrink-0">
+                    <div class="w-[85vw] md:w-[24vw] shrink-0 aspect-[4/5] img-container shadow-lg"><img src="images/Carrossel  Mansions Construtora 1.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/800x1000/c0c0c0/1a1a1a?text=Slide+1'"></div>
+                    <div class="w-[85vw] md:w-[24vw] shrink-0 aspect-[4/5] img-container shadow-lg"><img src="images/Carrossel  Mansions Construtora 2.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/800x1000/c0c0c0/1a1a1a?text=Slide+2'"></div>
+                    <div class="w-[85vw] md:w-[24vw] shrink-0 aspect-[4/5] img-container shadow-lg"><img src="images/Carrossel  Mansions Construtora 3.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/800x1000/c0c0c0/1a1a1a?text=Slide+3'"></div>
+                    <div class="w-[85vw] md:w-[24vw] shrink-0 aspect-[4/5] img-container shadow-lg"><img src="images/Carrossel  Mansions Construtora 4.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/800x1000/c0c0c0/1a1a1a?text=Slide+4'"></div>
+                    <div class="w-[85vw] md:w-[24vw] shrink-0 aspect-[4/5] img-container shadow-lg"><img src="images/Carrossel  Mansions Construtora 5.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/800x1000/c0c0c0/1a1a1a?text=Slide+5'"></div>
+                </div>
 
-    <!-- Social Media (Posts Static Grid) -->
-    <section class="py-20 bg-[#dfdfdf]">
-        <div class="max-w-screen-2xl mx-auto px-6 md:px-16 flex flex-col md:grid md:grid-cols-3 gap-6 md:gap-8 reveal">
-            <div class="w-full aspect-[4/5] img-container social-img-container"><img src="images/post1.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/800x1000/c0c0c0/1a1a1a?text=Post'"></div>
-            <div class="w-full aspect-[4/5] img-container social-img-container"><img src="images/post2.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/800x1000/c0c0c0/1a1a1a?text=Post'"></div>
-            <div class="w-full aspect-[4/5] img-container social-img-container"><img src="images/post3.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/800x1000/c0c0c0/1a1a1a?text=Post'"></div>
+                <!-- Divisor Fino -->
+                <div class="w-16 md:w-32 shrink-0 flex items-center justify-center"><div class="w-px h-32 bg-black/10"></div></div>
+
+                <!-- ====== 2. ALESSANDRA HASCHER ====== -->
+                <div class="w-[80vw] md:w-[22vw] shrink-0 flex flex-col gap-2 border-l-4 border-[var(--neon)] pl-4 md:pl-6 mr-2 md:mr-4">
+                    <h3 class="font-sans font-black text-2xl md:text-4xl uppercase tracking-tighter">Alessandra Hascher</h3>
+                    <span class="text-[10px] uppercase tracking-widest opacity-60">Terapeuta de Tarot</span>
+                </div>
+                <!-- Reels -->
+                <div class="w-[75vw] md:w-[18vw] shrink-0 aspect-[9/16] img-container shadow-lg"><img src="images/Instagram story - 1.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x711/c0c0c0/1a1a1a?text=Reels'"></div>
+                <div class="w-[75vw] md:w-[18vw] shrink-0 aspect-[9/16] img-container shadow-lg"><img src="images/Instagram story - 2.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x711/c0c0c0/1a1a1a?text=Reels'"></div>
+                <!-- Carrossel (Agrupado para ficar colado) -->
+                <div class="flex gap-1 shrink-0">
+                    <div class="w-[85vw] md:w-[24vw] shrink-0 aspect-[4/5] img-container shadow-lg"><img src="images/Carrossel tarot 1.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/800x1000/c0c0c0/1a1a1a?text=Slide+1'"></div>
+                    <div class="w-[85vw] md:w-[24vw] shrink-0 aspect-[4/5] img-container shadow-lg"><img src="images/Carrossel tarot 2.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/800x1000/c0c0c0/1a1a1a?text=Slide+2'"></div>
+                    <div class="w-[85vw] md:w-[24vw] shrink-0 aspect-[4/5] img-container shadow-lg"><img src="images/Carrossel tarot 3.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/800x1000/c0c0c0/1a1a1a?text=Slide+3'"></div>
+                    <div class="w-[85vw] md:w-[24vw] shrink-0 aspect-[4/5] img-container shadow-lg"><img src="images/Carrossel tarot 4.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/800x1000/c0c0c0/1a1a1a?text=Slide+4'"></div>
+                    <div class="w-[85vw] md:w-[24vw] shrink-0 aspect-[4/5] img-container shadow-lg"><img src="images/Carrossel tarot 5.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/800x1000/c0c0c0/1a1a1a?text=Slide+5'"></div>
+                </div>
+
+                <!-- Divisor Fino -->
+                <div class="w-16 md:w-32 shrink-0 flex items-center justify-center"><div class="w-px h-32 bg-black/10"></div></div>
+
+                <!-- ====== 3. STUDIO LUZ ====== -->
+                <div class="w-[80vw] md:w-[22vw] shrink-0 flex flex-col gap-2 border-l-4 border-[var(--neon)] pl-4 md:pl-6 mr-2 md:mr-4">
+                    <h3 class="font-sans font-black text-2xl md:text-4xl uppercase tracking-tighter">Studio Luz</h3>
+                    <span class="text-[10px] uppercase tracking-widest opacity-60">Branding e Marketing</span>
+                </div>
+                <!-- Reels -->
+                <div class="w-[75vw] md:w-[18vw] shrink-0 aspect-[9/16] img-container shadow-lg"><img src="images/Instagram story - 4.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x711/c0c0c0/1a1a1a?text=Reels'"></div>
+                <div class="w-[75vw] md:w-[18vw] shrink-0 aspect-[9/16] img-container shadow-lg"><img src="images/Instagram story - 5.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x711/c0c0c0/1a1a1a?text=Reels'"></div>
+                <!-- Carrossel (Agrupado para ficar colado) -->
+                <div class="flex gap-1 shrink-0">
+                    <div class="w-[85vw] md:w-[24vw] shrink-0 aspect-[4/5] img-container shadow-lg"><img src="images/Carrossel luz 1.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/800x1000/c0c0c0/1a1a1a?text=Slide+1'"></div>
+                    <div class="w-[85vw] md:w-[24vw] shrink-0 aspect-[4/5] img-container shadow-lg"><img src="images/Carrossel luz 2.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/800x1000/c0c0c0/1a1a1a?text=Slide+2'"></div>
+                    <div class="w-[85vw] md:w-[24vw] shrink-0 aspect-[4/5] img-container shadow-lg"><img src="images/Carrossel luz 3.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/800x1000/c0c0c0/1a1a1a?text=Slide+3'"></div>
+                    <div class="w-[85vw] md:w-[24vw] shrink-0 aspect-[4/5] img-container shadow-lg"><img src="images/Carrossel luz 4.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/800x1000/c0c0c0/1a1a1a?text=Slide+4'"></div>
+                    <div class="w-[85vw] md:w-[24vw] shrink-0 aspect-[4/5] img-container shadow-lg"><img src="images/Carrossel luz 5.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/800x1000/c0c0c0/1a1a1a?text=Slide+5'"></div>
+                </div>
+
+                <!-- Divisor Fino -->
+                <div class="w-16 md:w-32 shrink-0 flex items-center justify-center"><div class="w-px h-32 bg-black/10"></div></div>
+
+                <!-- ====== 4. OK INTERCÂMBIO ====== -->
+                <div class="w-[80vw] md:w-[22vw] shrink-0 flex flex-col gap-2 border-l-4 border-[var(--neon)] pl-4 md:pl-6 mr-2 md:mr-4">
+                    <h3 class="font-sans font-black text-2xl md:text-4xl uppercase tracking-tighter">OK Intercâmbio</h3>
+                    <span class="text-[10px] uppercase tracking-widest opacity-60">Social Media & Conteúdo</span>
+                </div>
+                <!-- Stories -->
+                <div class="w-[75vw] md:w-[18vw] shrink-0 aspect-[9/16] img-container shadow-lg"><img src="images/story1.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x711/c0c0c0/1a1a1a?text=Story'"></div>
+                <div class="w-[75vw] md:w-[18vw] shrink-0 aspect-[9/16] img-container shadow-lg"><img src="images/story2.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x711/c0c0c0/1a1a1a?text=Story'"></div>
+                <div class="w-[75vw] md:w-[18vw] shrink-0 aspect-[9/16] img-container shadow-lg"><img src="images/story3.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x711/c0c0c0/1a1a1a?text=Story'"></div>
+                <div class="w-[75vw] md:w-[18vw] shrink-0 aspect-[9/16] img-container shadow-lg"><img src="images/story4.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x711/c0c0c0/1a1a1a?text=Story'"></div>
+                <div class="w-[75vw] md:w-[18vw] shrink-0 aspect-[9/16] img-container shadow-lg"><img src="images/story5.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x711/c0c0c0/1a1a1a?text=Story'"></div>
+                <!-- Posts (Agrupado para ficar colado) -->
+                <div class="flex gap-1 shrink-0">
+                    <div class="w-[85vw] md:w-[24vw] shrink-0 aspect-[4/5] img-container shadow-lg"><img src="images/post1.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/800x1000/c0c0c0/1a1a1a?text=Post'"></div>
+                    <div class="w-[85vw] md:w-[24vw] shrink-0 aspect-[4/5] img-container shadow-lg"><img src="images/post2.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/800x1000/c0c0c0/1a1a1a?text=Post'"></div>
+                    <div class="w-[85vw] md:w-[24vw] shrink-0 aspect-[4/5] img-container shadow-lg"><img src="images/post3.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/800x1000/c0c0c0/1a1a1a?text=Post'"></div>
+                </div>
+
+                <!-- Espaço extra no final para a rolagem terminar lindamente -->
+                <div class="w-[10vw] shrink-0"></div>
+            </div>
         </div>
     </section>
 
@@ -713,6 +764,7 @@
 
             const paddingRight = window.innerWidth > 768 ? 64 : 24;
 
+            // Animação Track 1: Projetos
             const projetosSection = document.getElementById('projetos');
             const projetosTrack = document.getElementById('projetos-track');
             if (projetosSection && projetosTrack) {
@@ -721,6 +773,7 @@
                 projetosTrack.style.transform = `translate3d(${-prog1 * maxScroll1}px, 0, 0)`;
             }
 
+            // Animação Track 2: Social Media (Multi-clientes)
             const socialSection = document.getElementById('social');
             const socialTrack = document.getElementById('social-track');
             if (socialSection && socialTrack) {
