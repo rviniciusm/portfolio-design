@@ -3,17 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Vinicius Medeiros — Portfólio Editorial</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <title>Vinicius Medeiros — Designer Digital & UI/UX</title>
+    <meta name="description" content="Vinicius Medeiros — Designer Digital & UI/UX em Fortaleza. Marcas que se destacam, telas que guiam e feeds que convertem.">
+    <meta name="theme-color" content="#111111">
+    <link rel="canonical" href="https://rviniciusm.github.io/portfolio-design/">
+    <!-- Favicon: monograma MV em Archivo Black creme no fundo #111, em images/favicon.png -->
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="apple-touch-icon" href="images/favicon.png">
+    <!-- Open Graph: preview com imagem ao compartilhar o link no WhatsApp, LinkedIn etc. -->
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:url" content="https://rviniciusm.github.io/portfolio-design/">
+    <meta property="og:title" content="Vinicius Medeiros — Designer Digital & UI/UX">
+    <meta property="og:description" content="Vinicius Medeiros — Designer Digital & UI/UX em Fortaleza. Marcas que se destacam, telas que guiam e feeds que convertem.">
+    <meta property="og:image" content="https://rviniciusm.github.io/portfolio-design/images/hero.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <script src="https://cdn.tailwindcss.com"></script>     
+    <!-- Importação OFICIAL e Segura do Google Fonts (Evita Erro 403) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <!-- A imagem do hero carrega logo no carregamento do site, sem esperar o scroll -->
+    <link rel="preload" as="image" href="images/hero.jpg">
     
     <style>
         :root {
-            --bg: #ECECEC; 
-            --text: #1a1a1a;
-            --neon: #DFFF00;
+            /* VERSÃO DARK — fundo preto, letras creme, nenhuma seção branca */
+            --bg: #111111;
+            --text: #EDEDED;
+            --neon: #EDEDED;
+            --blue-hover: #6B5BFF; /* Azul clareado: o #2F00FF sumia no fundo preto */
+            --lime: #CCFF00; /* Verde neon da faixa do footer, como no Brand Rich */
+            
+            /* Definição de fontes */
+            --font-title: 'Archivo Black', sans-serif;
             --font-sans: 'Archivo', sans-serif;
             --font-serif: 'Instrument Serif', serif;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
         }
 
         body {
@@ -21,440 +50,659 @@
             color: var(--text);
             font-family: var(--font-sans);
             -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale; 
+            text-rendering: optimizeLegibility; 
             overflow-x: hidden; 
             width: 100vw;
             position: relative;
         }
+
+        ::selection { background: var(--blue-hover); color: #fff; }
 
         body::before {
             content: "";
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background-image: url("https://grainy-gradients.vercel.app/noise.svg");
-            opacity: 0.06; 
+            opacity: 0.04; 
+            filter: invert(1); /* Grão branco, pra aparecer no fundo escuro */
             pointer-events: none;
             z-index: 9999;
         }
 
-        /* --- Estilos do Preloader --- */
-        #preloader {
-            position: fixed;
-            inset: 0;
-            z-index: 10000;
-            background-color: var(--bg);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            transition: opacity 0.8s cubic-bezier(0.19, 1, 0.22, 1), transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
-        }
-        
-        #preloader.loaded {
-            opacity: 0;
-            transform: translateY(-20px);
-            pointer-events: none;
-        }
-
-        .loader-text {
-            font-size: 11px;
-            font-weight: 900;
+       /* --- Tipografia Brutalista GIGANTE (Ajustada) --- */
+       .hero-wall-text {
+            font-family: var(--font-title);
+            line-height: 0.90 !important; 
+            letter-spacing: -0.06em;
             text-transform: uppercase;
-            letter-spacing: 0.5em;
-            margin-bottom: 20px;
-            color: var(--text);
-            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+            /* Um pouquinho maior, pra ocupar o vão entre os títulos e a imagem do hero */
+            font-size: clamp(4.2rem, 5.1vw, 6.8rem); 
+            -webkit-text-stroke: 2px var(--text); /* Contorno creme base */
+            word-break: break-word;
+            padding-top: 6vh; 
+            width: 100%;
         }
 
-        .loader-line {
-            width: 200px;
-            height: 2px;
-            background: rgba(0,0,0,0.1);
+        .hero-inline-link {
             position: relative;
-            overflow: hidden;
+            cursor: pointer;
+            display: inline;
+            text-decoration: none;
+            color: var(--text);
+            /* Define que a cor e o contorno terão transição suave */
+            transition: color 0.15s ease-out, -webkit-text-stroke 0.15s ease-out; 
         }
 
-        .loader-line::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0;
-            height: 100%; width: 100%;
-            background: var(--neon);
-            animation: slide 1.5s ease-in-out infinite;
-            transform-origin: left;
+        .hero-inline-link sup {
+            font-size: 0.4em;
+            top: -1.2em;
+            font-family: var(--font-title);
+            margin-right: 6px; 
+            color: var(--text);
+            transition: color 0.15s ease-out;
+            -webkit-text-stroke: 0px; 
         }
 
-        @keyframes slide {
-            0% { transform: scaleX(0); transform-origin: left; }
-            50% { transform: scaleX(1); transform-origin: left; }
-            50.1% { transform-origin: right; }
-            100% { transform: scaleX(0); transform-origin: right; }
+        /* Efeito de Hover: Agora o preenchimento E o contorno ficam azuis */
+        .hero-inline-link:hover, 
+        .hero-inline-link:hover sup {
+            color: var(--blue-hover);
+            -webkit-text-stroke: 2px var(--blue-hover); 
         }
 
-        .title-huge {
-            font-weight: 900;
-            line-height: 0.9; 
-            letter-spacing: -0.05em;
+        /* Destaque automático no celular (sem hover): exatamente a mesma cor
+           do hover, aplicada pelo JS, um projeto de cada vez */
+        .hero-inline-link.hero-destaque,
+        .hero-inline-link.hero-destaque sup {
+            color: var(--blue-hover);
+            -webkit-text-stroke: 2px var(--blue-hover);
+        }
+
+        /* Separadores Creme e Grossos (Estáticos) */
+        .separator {
+            font-family: var(--font-title);
+            color: var(--text); 
+            opacity: 1; 
+            padding: 0 4px;
+            -webkit-text-stroke: 2px var(--text);
+            pointer-events: none; /* Garante que o hover não afete o traço */
+        }
+
+        /* Todos os títulos Archivo Black — quase colados, mas não colados, como no Brand Rich.
+           Archivo Black só tem peso 400, então o peso extra vem do contorno de 1px na mesma cor.
+           Entrelinha 0,84 com !important: as classes de tamanho do Tailwind (text-7xl etc.)
+           também definem line-height: 1 e estavam sobrescrevendo o leading — com !important nada passa por cima.
+           Só é seguro usar entrelinha curta porque os títulos de exibição agora são sem acento nem cedilha. */
+        .title-brandrich {
+            font-family: var(--font-title);
+            line-height: 0.84 !important; 
+            letter-spacing: -0.06em;
+            word-spacing: -0.02em;
+            -webkit-text-stroke: 1px var(--text);
             text-transform: uppercase;
-            font-size: clamp(2.8rem, 10vw, 9.5rem); 
-            white-space: nowrap; 
         }
 
+        /* Linha de título quebrada à mão: no PC cada linha é um bloco quase colado na próxima;
+           no celular volta a ser texto corrido e quebra naturalmente. */
+        .titulo-linha { display: inline; }
+        @media (min-width: 768px) {
+            .titulo-linha { display: block; line-height: 0.84; margin-bottom: 0; }
+            .titulo-linha:last-child { margin-bottom: 0; }
+        }
+
+        /* Qualquer outro texto com a fonte de título também entra no mesmo padrão apertado */
+        .font-title {
+            font-family: var(--font-title);
+            letter-spacing: -0.07em;
+        }
+
+        /* Tipografia Serifada Itálica com espaçamento reduzido */
         .serif-italic {
             font-family: var(--font-serif);
             font-style: italic;
-            line-height: 1.1;
+            line-height: 0.9; /* Super apertado como na referência */
             font-weight: normal;
         }
 
+        /* Container flutuante (Preview) */
         .preview-container {
             position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0.8);
-            width: 35vw;
-            height: 80vh;
-            z-index: 5;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%) scale(0.85);
+            width: 35vw; 
+            height: 35vw; 
+            z-index: 5; pointer-events: none; opacity: 0;
+            transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+            display: flex; align-items: center; justify-content: center;
+        }
+        /* Ruído de papel também sobre o preview */
+        .preview-container::after {
+            content: "";
+            position: absolute; inset: 0; z-index: 6;
+            background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+            background-size: 180px 180px;
+            opacity: 0.12; mix-blend-mode: multiply;
             pointer-events: none;
-            opacity: 0;
-            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
-
+        
+        /* Preview de pôster: proporção A4 (1:1,414), pra imagem aparecer inteira,
+           sem cortar e sem sobrar barra preta nas bordas. O z-index fica acima
+           da nav (100), então o pôster pode passar por cima do menu superior
+           sem ser cortado. */
+        .preview-container.is-poster {
+            width: auto;
+            height: 84vh;
+            aspect-ratio: 1 / 1.414;
+            max-width: 92vw;
+            z-index: 150;
+        }
+        .preview-container.is-poster .preview-image {
+            object-fit: contain;
+            background-color: var(--bg);
+        }
+        
         .preview-container.active {
-            opacity: 1;
-            transform: translate(-50%, -50%) scale(1);
+            opacity: 1; transform: translate(-50%, -50%) scale(1);
         }
-
         .preview-image {
             width: 100%;
             height: 100%;
-            object-fit: contain;
+            object-fit: cover; 
             display: none;
-            filter: drop-shadow(0 20px 50px rgba(0,0,0,0.15));
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+            filter: sepia(0.06) saturate(0.92) contrast(1.03);
         }
-
         .preview-image.visible { display: block; }
 
-        .hero-link-item {
-            position: relative;
-            cursor: pointer;
-            transition: color 0.3s ease;
-            display: inline-block;
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .hero-link-item .number {
-            font-size: 0.3em;
-            vertical-align: top;
-            margin-right: 10px;
-            font-weight: 900;
-            color: var(--neon); 
-            text-shadow: 1px 1px 0px rgba(0,0,0,0.1);
-        }
-
-        .hero-link-item::after {
-            content: '';
-            position: absolute;
-            left: 0; top: 55%; width: 0; height: 12px;
-            background-color: var(--neon); 
-            transform: translateY(-50%);
-            transition: width 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        @media (min-width: 1024px) {
-            .hero-link-item:hover::after { width: 100%; }
-        }
-
-        .marquee-wrapper {
-            overflow: hidden;
-            width: 100%;
-            max-width: 100vw;
-        }
         
-        .marquee {
+        .nav-logo-link {
+            display: flex; align-items: center; justify-content: center;
+            width: 225px; height: 60px;
             overflow: hidden;
+            transition: transform 0.3s ease, opacity 0.3s ease, filter 0.3s ease;
+        }
+        .nav-logo-link:hover {
+            transform: scale(1.05);
+            opacity: 0.9;
+            filter: drop-shadow(0 4px 10px rgba(255,255,255,0.25));
+        }
+        .nav-logo-img {
+            width: 100%; height: 100%;
+            object-fit: cover; object-position: center;
+            display: block;
+            filter: invert(1);
+        }
+        @media (max-width: 768px) {
+            .nav-logo-link { width: 140px; height: 38px; }
+        }
+
+        /* Links da navbar — Archivo Black, bem maior, como no Brand Rich.
+           20px só a partir de telas grandes, pra 3 itens caberem sem apertar. */
+        .nav-link {
+            font-family: var(--font-title);
+            font-size: 16px;
+            letter-spacing: -0.05em;
+            text-transform: uppercase;
+            color: var(--text);
+            text-decoration: none;
             white-space: nowrap;
-            position: relative;
-            padding: 1.5rem 0;
-            border-top: 1px solid rgba(0,0,0,0.1);
-            border-bottom: 1px solid rgba(0,0,0,0.1);
-            width: 100%;
         }
-
-        .marquee-content {
-            display: inline-block;
-            animation: marquee 30s linear infinite;
-        }
-
-        @keyframes marquee {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-
-        #cursor-box {
-            position: fixed;
-            width: 12px; height: 12px;
-            background: var(--neon); 
-            z-index: 10001;
-            pointer-events: none;
-            box-shadow: 0 0 15px rgba(223, 255, 0, 0.3);
-            transition: transform 0.2s cubic-bezier(0.19, 1, 0.22, 1);
-        }
-
-        .reveal {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: all 1s cubic-bezier(0.19, 1, 0.22, 1);
-        }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .img-container {
-            overflow: hidden;
-            background: #d4d4d4; 
-            position: relative;
-        }
-        .img-container img {
-            transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1);
-        }
-
         @media (min-width: 1024px) {
-            .img-container:hover img { transform: scale(1.03); }
+            .nav-link { font-size: 20px; }
         }
+
+        /* Menu de serviços — inspirado no Brand Rich */
+        .servico-item {
+            display: flex; align-items: baseline; gap: 1rem;
+            font-family: var(--font-title);
+            text-transform: uppercase;
+            line-height: 1;
+            letter-spacing: -0.07em;
+            font-size: clamp(2.4rem, 4.6vw, 4.5rem);
+            color: var(--text);
+            text-decoration: none;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+            transition: color 0.15s ease;
+        }
+        .servico-item:hover { color: var(--blue-hover); }
+        .servico-num { font-size: 0.35em; }
+        .servico-desc {
+            font-family: var(--font-sans);
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            opacity: 0.6;
+            margin-left: auto;
+            text-align: right;
+        }
+
+        /* Hierarquia editorial — rótulo pequeno em texto normal, sem caixa alta */
+        .rotulo-editorial {
+            font-family: var(--font-sans);
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: none;
+            color: var(--text);
+            opacity: 0.6;
+            display: block;
+            margin-bottom: 1rem;
+        }
+        /* Parágrafo editorial — pesado e grosso, como no Brand Rich, pra ser conceito e não erro */
+        .texto-editorial {
+            font-family: var(--font-sans);
+            font-size: 18px;
+            font-weight: 700;
+            line-height: 1.20;
+            letter-spacing: -0.02em;
+            color: var(--text);
+            max-width: 540px;
+        }
+
+        /* Rótulo sobre a imagem — texto normal, não caixa alta, estilo revista */
+        .img-label {
+            position: absolute; left: 0; right: 0; z-index: 3;
+            display: flex; justify-content: space-between; gap: 1rem;
+            padding: 18px 20px;
+            color: #fff;
+            font-family: var(--font-sans);
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            text-transform: none;
+            text-shadow: 0 1px 10px rgba(0,0,0,0.5);
+            pointer-events: none;
+        }
+        .img-label-top { top: 0; }
+        .img-label-bottom { bottom: 0; }
+
+        /* Cursor */
+        #cursor-box {
+            position: fixed; width: 12px; height: 12px; background: var(--text); 
+            z-index: 10001; pointer-events: none;
+            transition: transform 0.15s cubic-bezier(0.19, 1, 0.22, 1), background-color 0.15s ease;
+        }
+
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.9s cubic-bezier(0.19, 1, 0.22, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        .img-container { overflow: hidden; background: #262626; position: relative; }
+        .img-container img {
+            transition: transform 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+            /* Filtro de papel: leve sépia + saturação mais baixa, em todas as imagens */
+            filter: sepia(0.06) saturate(0.92) contrast(1.03);
+        }
+        /* Textura de ruído bem leve sobre todas as imagens, como folha de revista.
+           Não pega a logo, porque a logo não está dentro de .img-container. */
+        .img-container::after {
+            content: "";
+            position: absolute; inset: 0; z-index: 2;
+            background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+            background-size: 180px 180px;
+            opacity: 0.14; mix-blend-mode: multiply;
+            pointer-events: none;
+        }
+        @media (min-width: 1024px) { .img-container:hover img { transform: scale(1.04); } }
+        /* Na seção de Serviços as fotos são só fotos de revista: sem zoom no hover */
+        #especialidades .img-container:hover img { transform: none; }
+
+        /* Faixa de Projetos arrastável (só no desktop, onde ela é horizontal):
+           cursor de mão, e o toque vertical continua rolando a página (pan-y)
+           enquanto o arrastar horizontal move os projetos */
+        #projetos-track {
+            cursor: grab;
+            touch-action: pan-y;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        #projetos-track.arrastando { cursor: grabbing; }
+        #projetos-track img { -webkit-user-drag: none; }
 
         .btn-editorial {
-            font-size: 10px;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            border-bottom: 2px solid var(--text);
-            padding-bottom: 4px;
-            display: inline-block;
-            transition: all 0.3s ease;
-            color: var(--text);
-            white-space: nowrap;
+            font-size: 11px; font-weight: 600; font-family: var(--font-sans); text-transform: uppercase; letter-spacing: 0.15em;
+            border-bottom: 2px solid var(--text); padding-bottom: 4px; display: inline-block;
+            transition: all 0.3s ease; color: var(--text); white-space: nowrap;
         }
-        .btn-editorial:hover {
-            opacity: 0.5;
-            padding-right: 10px; 
-            border-bottom-color: var(--neon);
+        .btn-editorial:hover { opacity: 0.6; padding-right: 8px; border-bottom-color: var(--text); }
+
+        /* Stories da seção Social Media: fade curto na troca entre o story 1 e o 2 de cada cliente.
+           Os 6 stories são pré-carregados no JS, então a troca é instantânea. */
+        .story-img { transition: opacity 0.15s ease; }
+        .story-img.trocando { opacity: 0; }
+        /* Botão 1/2 dentro de cada story, na parte de baixo, no estilo do
+           Before/After da referência: pílula creme, o número ativo fica preto */
+        .btn-story-mini {
+            font-family: var(--font-title);
+            font-size: 13px;
+            padding: 8px 18px;
+            border-radius: 9999px;
+            color: #111;
+            background: transparent;
+            border: none;
+            transition: all 0.2s ease;
+            cursor: pointer;
         }
+        .btn-story-mini.ativo { background: #111; color: #fff; }
+        .btn-story-mini:not(.ativo):hover { opacity: 0.6; }
 
-        .exp-row { border-bottom: 1px solid rgba(255,255,255,0.15); padding: 2.5rem 0; }
-        .tool-card { border-top: 1px solid rgba(0,0,0,0.1); padding: 2.5rem 0; position: relative; }
-        .tool-name { position: relative; display: inline-block; }
-        .tool-name::after {
-            content: ''; position: absolute; left: 0; top: 50%; width: 0; height: 4px;
-            background-color: var(--neon); transition: width 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-        }
-
-        @media (min-width: 1024px) { .tool-card:hover .tool-name::after { width: 100%; } }
-
-        @keyframes panImage {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(calc(-100% + 20vh)); } 
-            100% { transform: translateY(0); }
-        }
-
-        .mobile-hero-img-container {
-            overflow: hidden;
-            position: relative;
-        }
-
-        .mobile-hero-img-container img {
-            height: auto;
+        /* Acordeão da Trajetória — gaveta como no "SOCIAL MEDIA SERVICES" do Brand Rich:
+           o + é feito de duas barrinhas; ao abrir, a vertical some e ele vira − */
+        .acordeao-item { border-bottom: 1px solid rgba(255,255,255,0.15); }
+        .acordeao-botao {
             width: 100%;
+            display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+            padding: 1.75rem 0;
+            background: none; border: none;
+            color: inherit;
+            cursor: pointer;
+            text-align: left;
+        }
+        .acordeao-botao:hover { opacity: 0.8; }
+        .acordeao-icone { position: relative; width: 22px; height: 22px; flex-shrink: 0; }
+        .acordeao-icone::before, .acordeao-icone::after {
+            content: "";
             position: absolute;
-            top: 0;
-            left: 0;
-            animation: panImage 15s ease-in-out infinite;
+            background: currentColor;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+        .acordeao-icone::before { left: 0; top: 50%; width: 100%; height: 2px; transform: translateY(-50%); }
+        .acordeao-icone::after { top: 0; left: 50%; width: 2px; height: 100%; transform: translateX(-50%); }
+        .acordeao-item.aberto .acordeao-icone::after { transform: translateX(-50%) scaleY(0); opacity: 0; }
+        .acordeao-conteudo { max-height: 0; overflow: hidden; transition: max-height 0.45s cubic-bezier(0.19, 1, 0.22, 1); }
+        .acordeao-conteudo-inner { padding: 0 0 1.75rem 0; max-width: 720px; }
+
+        .tool-card { border-top: 1px solid rgba(255,255,255,0.12); padding: 2rem 0; position: relative; }
+        
+        .marquee-wrapper { overflow: hidden; width: 100%; }
+        .marquee { overflow: hidden; white-space: nowrap; position: relative; padding: 1.5rem 0; border-top: 1px solid rgba(255,255,255,0.12); border-bottom: 1px solid rgba(255,255,255,0.12); }
+        /* Marquee rápido (10s) e com loop perfeito: o espaçamento é padding
+           dentro de cada item, não gap do container — assim as duas metades
+           têm exatamente o mesmo tamanho e o -50% não dá pulinho */
+        .marquee-content { display: flex; align-items: center; animation: marquee 10s linear infinite; will-change: transform; }
+        .marquee-item { display: flex; align-items: center; gap: 1.5rem; padding-right: 1.5rem; }
+        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        
+        .marquee-img {
+            width: 45px; height: 45px; object-fit: cover; flex-shrink: 0;
+            background-color: #262626; filter: grayscale(0%);
+            transition: transform 0.3s ease;
+            filter: sepia(0.06) saturate(0.92) contrast(1.03);
+        }
+        .marquee-img:hover { transform: scale(1.1) rotate(5deg); }
+
+        /* Telas baixas no desktop (notebook com pouca altura): a foto do
+           card encolhe e a descrição some, pra faixa de Projetos caber sem o
+           título ir pra trás da nav. Não vale no celular, onde os projetos
+           são uma lista vertical */
+        @media (min-width: 769px) and (max-height: 820px) {
+            #projetos-track .aspect-square { aspect-ratio: auto; height: 32vh; }
+            #projetos-track p { display: none; }
         }
 
         @media (max-width: 768px) {
             .preview-container { display: none; }
             #cursor-box { display: none; }
             body { cursor: auto; }
-            .hero-link-item::after { display: none; }
-            .tool-name::after { display: none; }
-            .w-full { max-width: 100%; }
+            /* Hero no celular: palavras inteiras, sem quebrar no meio (o
+               word-break: break-word era o que partia RESTAURANTE e FOTOGRAFIA).
+               Fonte menor (10vw) pra palavra maior caber numa linha, e contorno
+               mais fino pra não emendar as letras */
+            .hero-wall-text {
+                font-size: clamp(2.2rem, 10vw, 3.5rem);
+                padding-top: 120px;
+                word-break: normal;
+                overflow-wrap: break-word;
+                -webkit-text-stroke: 1px var(--text);
+            }
+            /* Títulos pesados no celular: tracking mais solto e sem contorno,
+               pra não emendar as letras; tamanho limitado a 11vw pra caber na tela */
+            .title-brandrich {
+                letter-spacing: -0.03em !important;
+                -webkit-text-stroke: 0px !important;
+                font-size: clamp(2.4rem, 11vw, 3rem) !important;
+            }
+            .font-title { letter-spacing: -0.03em; }
+            .servico-item { letter-spacing: -0.04em; }
+            /* Descrição do menu de serviços some no celular: não cabia ao lado
+               do nome e ficava cortada na borda, igual no Brand Rich mobile */
+            .servico-desc { display: none; }
+            /* Manifesto pode quebrar em duas linhas no celular */
+            .manifesto-titulo {
+                white-space: normal !important;
+                font-size: clamp(2.6rem, 12.5vw, 4.5rem) !important;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Preloader -->
-    <div id="preloader">
-        <div class="loader-text">Carregando Acervo</div>
-        <div class="loader-line"></div>
-    </div>
-
     <div id="cursor-box"></div>
 
     <div class="preview-container" id="preview-container">
-        <img src="images/projeto3.jpg" class="preview-image" id="img-projetos" onerror="this.src='https://placehold.co/800x1200/ececec/1a1a1a?text=Projetos'">
-        <img src="images/story3.jpg" class="preview-image" id="img-social" onerror="this.src='https://placehold.co/800x1200/ececec/1a1a1a?text=Social'">
-        <img src="images/poster4.png" class="preview-image" id="img-arquivo" onerror="this.src='https://placehold.co/800x1200/ececec/1a1a1a?text=Posters'">
+        <img src="images/projeto4.png" alt="" class="preview-image" id="img-nautico" onerror="this.src='https://placehold.co/800x800/1a1a1a/ededed?text=N%C3%A1utico'">
+        <img src="images/tracosememoriastopo.png" alt="" class="preview-image" id="img-tracos" onerror="this.src='https://placehold.co/800x800/1a1a1a/ededed?text=Tra%C3%A7os'">
+        <img src="images/foto10.jpg" alt="" class="preview-image" id="img-erisom" onerror="this.src='https://placehold.co/800x800/1a1a1a/ededed?text=Erisom'">
+        <img src="images/projeto2.jpg" alt="" class="preview-image" id="img-definido" onerror="this.src='https://placehold.co/800x800/1a1a1a/ededed?text=App'">
+        <img src="images/nimbotopo.png" alt="" class="preview-image" id="img-nimbo" onerror="this.src='https://placehold.co/800x800/1a1a1a/ededed?text=Nimbo'">
+        <img src="images/poster4.png" alt="" class="preview-image" id="img-social" onerror="this.src='https://placehold.co/800x1131/1a1a1a/ededed?text=Social+Media'">
     </div>
 
-    <!-- Barra Superior -->
-    <nav class="fixed top-0 left-0 w-full p-6 md:p-10 flex justify-between items-center z-[100] bg-[var(--bg)] border-b border-black/10 transition-all">
-        <div class="flex gap-6 md:gap-10 text-[10px] md:text-[11px] font-black uppercase tracking-widest">
-            <a href="#projetos" class="hover:opacity-50 transition-opacity">Projetos</a>
-            <a href="#arquivo" class="hidden md:inline-block hover:opacity-50 transition-opacity">Posters</a>
+    <!-- Navbar — no celular: MENU + à esquerda, logo no meio, CONTATO à direita,
+         como no Brand Rich. No desktop: 3 links à esquerda, logo no meio, CONTATO à direita -->
+    <nav class="fixed top-0 left-0 w-full px-4 py-5 md:px-12 md:py-7 flex justify-between items-center z-[100] bg-[var(--bg)] border-b border-white/10 transition-all">
+        <div class="flex items-center shrink-0 md:w-1/3">
+            <button type="button" class="nav-link md:hidden" onclick="abrirMenu()" aria-label="Abrir menu">MENU +</button>
+            <div class="hidden md:flex gap-4 md:gap-6 lg:gap-8">
+                <a href="#especialidades" class="nav-link hover:opacity-50 transition-opacity">SERVICOS +</a>
+                <a href="#projetos" class="nav-link hover:opacity-50 transition-opacity">PROJETOS</a>
+                <a href="#trajetoria" class="nav-link hover:opacity-50 transition-opacity">TRAJETORIA</a>
+            </div>
         </div>
-        <div class="absolute left-1/2 -translate-x-1/2">
-            <span class="font-black text-sm md:text-xl tracking-tighter uppercase">Vinicius Designer</span>
+        
+        <div class="flex justify-center items-center flex-1 min-w-0 md:w-1/3 md:flex-none">
+            <a href="#" onclick="window.scrollTo({ top: 0, behavior: 'smooth' }); return false;" class="nav-logo-link" aria-label="Voltar ao topo" title="Voltar ao topo">
+                <img src="images/logovini.png" alt="Vinicius Medeiros" class="nav-logo-img">
+            </a>
         </div>
-        <div class="text-[10px] md:text-[11px] font-black uppercase tracking-widest text-right">
-            <a href="#contato" class="hover:opacity-50 transition-opacity">Contato</a>
+
+        <div class="shrink-0 md:w-1/3 text-right">
+            <a href="#contato" class="nav-link hover:opacity-50 transition-opacity">CONTATO</a>
         </div>
     </nav>
 
-    <!-- Sessão Hero Principal -->
-    <header class="min-h-screen flex flex-col justify-center px-6 md:px-16 pt-32 pb-10">
-        <div class="max-w-screen-2xl mx-auto w-full overflow-hidden">
-            <div class="reveal active flex flex-col items-start gap-12 md:gap-2 mt-10 md:mt-0">
-                
-                <div class="w-full md:w-auto">
-                    <div class="title-huge">
-                        <a href="#projetos" class="hero-link-item" onmouseenter="showPreview('projetos')" onmouseleave="hidePreview()">
-                            <span class="number">1</span>PROJETOS —
-                        </a>
-                    </div>
-                    <a href="#projetos" class="md:hidden block mt-4 w-full h-[20vh] mobile-hero-img-container opacity-90 shadow-lg">
-                        <img src="images/projeto3.jpg" onerror="this.src='https://placehold.co/800x1200/d4d4d4/1a1a1a?text=Projetos'">
-                    </a>
-                </div>
+    <!-- Menu mobile em tela cheia -->
+    <div id="menu-mobile" class="fixed inset-0 z-[200] bg-[var(--bg)] hidden flex-col overflow-y-auto">
+        <div class="flex justify-between items-center px-4 py-5 border-b border-white/10">
+            <span class="nav-link">MENU</span>
+            <button type="button" class="nav-link" onclick="fecharMenu()" aria-label="Fechar menu">FECHAR ×</button>
+        </div>
+        <nav class="flex flex-col px-5 pt-8">
+            <a href="#especialidades" onclick="fecharMenu()" class="servico-item"><span class="servico-num">1</span><span>SERVICOS</span></a>
+            <a href="#projetos" onclick="fecharMenu()" class="servico-item"><span class="servico-num">2</span><span>PROJETOS</span></a>
+            <a href="#trajetoria" onclick="fecharMenu()" class="servico-item"><span class="servico-num">3</span><span>TRAJETORIA</span></a>
+            <a href="#social" onclick="fecharMenu()" class="servico-item"><span class="servico-num">4</span><span>SOCIAL</span></a>
+            <a href="#contato" onclick="fecharMenu()" class="servico-item"><span class="servico-num">5</span><span>CONTATO</span></a>
+        </nav>
+        <div class="mt-auto px-5 py-10">
+            <p class="serif-italic text-2xl opacity-70">Vinicius Medeiros — Design Digital &amp; UI/UX</p>
+            <p class="font-sans text-sm opacity-50 mt-2">Fortaleza, BR</p>
+        </div>
+    </div>
 
-                <div class="w-full md:w-auto">
-                    <div class="title-huge">
-                        <a href="#social" class="hero-link-item" onmouseenter="showPreview('social')" onmouseleave="hidePreview()">
-                            <span class="number">2</span> FEED —
-                        </a>
-                    </div>
-                    <a href="#social" class="md:hidden block mt-4 w-full h-[20vh] mobile-hero-img-container opacity-90 shadow-lg">
-                        <img src="images/story3.jpg" onerror="this.src='https://placehold.co/800x1200/d4d4d4/1a1a1a?text=Social+Media'">
-                    </a>
-                </div>
-
-                <div class="w-full md:w-auto">
-                    <div class="title-huge">
-                        <a href="#arquivo" class="hero-link-item" onmouseenter="showPreview('arquivo')" onmouseleave="hidePreview()">
-                            <span class="number">3</span> GALERIA —
-                        </a>
-                    </div>
-                    <a href="#arquivo" class="md:hidden block mt-4 w-full h-[20vh] mobile-hero-img-container opacity-90 shadow-lg">
-                        <img src="images/poster4.png" onerror="this.src='https://placehold.co/800x1200/d4d4d4/1a1a1a?text=Posters'">
-                    </a>
-                </div>
-
+    <!-- Header Principal -->
+    <header class="w-full flex flex-col min-h-[84vh] justify-between pt-10">
+        <div class="w-full px-6 md:px-12 flex-1 flex flex-col justify-center reveal active">
+            <div class="hero-wall-text">
+                <a href="#projetos" class="hero-inline-link" onmouseenter="showPreview('nautico', false)" onmouseleave="hidePreview()"><sup>1</sup>NAUTICO RESTAURANTE</a> 
+                <span class="separator">—</span> 
+                <a href="#projetos" class="hero-inline-link" onmouseenter="showPreview('tracos', false)" onmouseleave="hidePreview()"><sup>2</sup>TRACOS E MEMORIAS</a> 
+                <span class="separator">—</span> 
+                <a href="#projetos" class="hero-inline-link" onmouseenter="showPreview('erisom', false)" onmouseleave="hidePreview()"><sup>3</sup>ERISOM FOTOGRAFIA</a> 
+                <span class="separator">—</span> 
+                <a href="#projetos" class="hero-inline-link" onmouseenter="showPreview('definido', false)" onmouseleave="hidePreview()"><sup>4</sup>+DEFINIDO APP</a> 
+                <span class="separator">—</span> 
+                <a href="#projetos" class="hero-inline-link" onmouseenter="showPreview('nimbo', false)" onmouseleave="hidePreview()"><sup>5</sup>NIMBO BAKERY</a> 
+                <span class="separator">—</span> 
+                <a href="#social" class="hero-inline-link" onmouseenter="showPreview('social', true)" onmouseleave="hidePreview()"><sup>6</sup>SOCIAL MEDIA E EDITORIAL</a>
             </div>
         </div>
     </header>
 
-    <!-- Editorial Image (Parallax) -->
-    <section class="pb-20 w-full">
-        <div class="w-full h-[60vh] md:h-[80vh] img-container reveal" id="parallax-container" style="overflow: hidden;">
-            <img src="images/hero.jpg" alt="Processo Criativo" id="parallax-img" class="w-full h-[140%] object-cover object-top will-change-transform" onerror="this.src='https://placehold.co/1920x1080/d4d4d4/1a1a1a?text=Editorial+Image'">
+    <div class="w-full mt-2 mb-12">
+        <div class="w-full h-[55vh] md:h-[78vh] img-container" id="parallax-container" style="overflow: hidden;">
+            <img src="images/hero.jpg" alt="Hero Image" id="parallax-img" fetchpriority="high" loading="eager" decoding="async" class="w-full h-[160%] object-cover object-center will-change-transform" onerror="this.src='https://placehold.co/1920x1080/262626/ededed?text=Hero+Image'">
         </div>
-        
-        <div class="max-w-screen-2xl mx-auto px-6 md:px-16">
-            <div class="mt-8 flex flex-col md:flex-row justify-between items-start reveal gap-4 border-b border-black/10 pb-8">
-                <span class="text-[9px] font-black uppercase tracking-[0.5em] text-black opacity-50">Ref: 088 — Ensaio</span>
-                <p class="serif-italic text-2xl md:text-3xl max-w-xl opacity-80">"O design não é apenas o que parece. O design é como funciona." <br>— <span class="uppercase font-sans font-black text-[10px] tracking-widest opacity-100 mt-2 block">Steve Jobs</span></p>
-            </div>
+    </div>
+
+    <!-- NOVA SESSÃO DE APRESENTAÇÃO (Nome em uma linha) -->
+    <section class="py-16 md:py-20 border-t border-white/10 overflow-hidden flex flex-col justify-center">
+        <div class="w-full px-6 md:px-12 reveal flex flex-col items-start">
+            
+            <!-- Título Ocupando a Largura em UMA LINHA (no celular quebra em duas) -->
+            <h2 class="title-brandrich manifesto-titulo mb-2 md:mb-4 whitespace-nowrap" 
+                style="font-size: clamp(2.6rem, 7.2vw, 10.5rem); line-height: 0.84; -webkit-text-stroke: 3px #EDEDED;">
+                VINICIUS MEDEIROS.
+            </h2>
+            
+            <!-- Serifada Apertada em Baixo -->
+            <p class="serif-italic opacity-90 w-full max-w-[95%]" 
+                style="font-size: clamp(1.5rem, 3.2vw, 3.4rem); line-height: 0.95;">
+                Design com contexto e intenção. Marcas que se destacam, telas que guiam e feeds que convertem.
+            </p>
         </div>
     </section>
 
-    <!-- Marquee -->
-    <section class="py-10">
-        <div class="marquee-wrapper">
-            <div class="marquee reveal">
-                <div class="marquee-content">
-                    <span class="title-huge text-4xl md:text-7xl mx-8 md:mx-12">UI/UX DESIGN</span>
-                    <span class="serif-italic text-4xl md:text-7xl mx-8 md:mx-12 text-[var(--neon)]" style="text-shadow: 1px 1px 0 #000;">IDENTIDADE VISUAL</span>
-                    <span class="title-huge text-4xl md:text-7xl mx-8 md:mx-12">UI/UX DESIGN</span>
-                    <span class="serif-italic text-4xl md:text-7xl mx-8 md:mx-12 text-[var(--neon)]" style="text-shadow: 1px 1px 0 #000;">SOCIAL MEDIA</span>
-                    <span class="title-huge text-4xl md:text-7xl mx-8 md:mx-12">EDITORIAL</span>
-                    <span class="serif-italic text-4xl md:text-7xl mx-8 md:mx-12 text-[var(--neon)]" style="text-shadow: 1px 1px 0 #000;">UX/UI DESIGN</span>
+    <!-- NOVA SEÇÃO: Serviços — inspirada no Brand Rich -->
+    <section id="especialidades" class="py-16 md:py-20 border-t border-white/10">
+        <div class="w-full px-5 md:px-6">
+
+            <!-- Menu à esquerda + imagem grande à direita -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-center mb-10 md:mb-14 reveal">
+                <div>
+                    <span class="rotulo-editorial">Serviços</span>
+                    <a href="#servico-marcas" class="servico-item" onmouseenter="trocarServico('images/marca.jpg')"><span class="servico-num">1</span><span>MARCAS</span><span class="servico-desc">Identidade Visual</span></a>
+                    <a href="#servico-uiux" class="servico-item" onmouseenter="trocarServico('images/projeto1.jpg')"><span class="servico-num">2</span><span>UI/UX</span><span class="servico-desc">Produto &amp; Interfaces</span></a>
+                    <a href="#servico-social" class="servico-item" onmouseenter="trocarServico('images/Carrossel tarot 3.jpg')"><span class="servico-num">3</span><span>FEED SOCIAL</span><span class="servico-desc">Social Media</span></a>
+                    <p class="font-sans text-base font-medium opacity-70 mt-6 leading-snug"><span class="hidden md:inline">Passa o mouse em cada serviço pra ver o trabalho. Clica pra ir direto pra ele.</span><span class="md:hidden">Toca em cada serviço pra ir direto pra ele.</span></p>
+                </div>
+                <div class="img-container aspect-[4/5]">
+                    <img id="img-servicos" src="images/marca.jpg" alt="Trabalhos de marca" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/800x1000/262626/ededed?text=Servi%C3%A7os'">
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- PROJETOS - Horizontal Scroll -->
-    <section id="projetos" class="relative h-[400vh]">
-        <div class="sticky top-0 h-screen flex flex-col justify-center overflow-hidden bg-[var(--bg)] z-10 py-6 md:py-10">
-            <div class="w-full max-w-screen-2xl mx-auto px-6 md:px-16 mb-4 md:mb-8 reveal">
-                <h2 class="text-[10px] font-black uppercase tracking-[0.5em] opacity-50 mb-3">Portfólio Selecionado</h2>
-                <h3 class="title-huge text-4xl md:text-6xl">Principais <br><span class="serif-italic">PROJETOS</span></h3>
+            <!-- Marcas: imagem à esquerda, texto à direita -->
+            <div id="servico-marcas" class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-center mb-10 md:mb-14 reveal">
+                <div class="img-container aspect-[4/5]">
+                    <img src="images/Bag_Chair nautico.png" alt="Náutico Restaurante — Identidade Visual" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/800x1000/262626/ededed?text=Nimbo+Bakery'">
+                </div>
+                <div>
+                    <h3 class="title-brandrich text-4xl md:text-7xl mb-2"><span class="titulo-linha">UMA BOA IDEIA</span>
+                    <span class="titulo-linha">VIRA UMA MARCA</span>
+                    <span class="titulo-linha">FORTE.</span></h3>
+                    <p class="texto-editorial mb-3">Penso nela como algo que aprende e evolui. Ao construir uma marca, crio os alicerces: a estratégia, o símbolo, o logotipo, a tipografia e a paleta de cores. É o caso do Náutico Restaurante e da Nimbo Bakery, duas identidades completas, do conceito à aplicação.</p>
+                </div>
             </div>
 
-            <div id="projetos-track" class="flex gap-6 md:gap-8 px-6 md:px-16 w-max will-change-transform mb-4 items-start">
+            <!-- UI/UX: texto à esquerda, imagem à direita (no celular a imagem
+                 vem primeiro, pra cada foto ficar seguida do seu texto) -->
+            <div id="servico-uiux" class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-center mb-10 md:mb-14 reveal">
+                <div class="order-2 md:order-1">
+                    <h3 class="title-brandrich text-4xl md:text-7xl mb-2"><span class="titulo-linha">INTERFACES QUE</span>
+                    <span class="titulo-linha">GUIAM SEM</span>
+                    <span class="titulo-linha">ESFORCO.</span></h3>
+                    <p class="texto-editorial mb-3">A experiência é tudo o que acontece entre o usuário e a sua marca: cada tela, cada toque, cada decisão. Cada ponto de contato, um post, uma tela, uma conversa é a sua marca falando com alguém. Quando todos eles falam a mesma língua, cada interação é... autêntica.</p>
+                </div>
+                <div class="img-container aspect-[4/5] order-1 md:order-2">
+                    <img src="images/projeto2.jpg" alt="+Definido App — UI/UX" loading="lazy" class="w-full h-full object-cover object-top" onerror="this.src='https://placehold.co/800x1000/262626/ededed?text=Tra%C3%A7os+%26+Mem%C3%B3rias'">
+                </div>
+            </div>
+
+            <!-- Feed Social: imagem à esquerda, texto à direita -->
+            <div id="servico-social" class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-center reveal">
+                <div class="img-container aspect-[4/5]">
+                    <img src="images/nauticofeed.png" alt="Social Media — Náutico Restaurante" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/800x1000/262626/ededed?text=Social+Media'">
+                </div>
+                <div>
+                    <h3 class="title-brandrich text-4xl md:text-7xl mb-2"><span class="titulo-linha">UM FEED VIVO</span>
+                    <span class="titulo-linha">PARECE UMA</span>
+                    <span class="titulo-linha">CONVERSA.</span></h3>
+                    <p class="texto-editorial mb-3">Carrosséis, stories e posts pensados pra quem vai ver. É o trabalho que fiz na JIT para a OK Intercâmbio e Alessandra Hascher, sempre com identidade, texto e imagem no mesmo tom.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    
+    <!-- Projetos — no desktop: rolagem lateral rápida (250vh) com arrastar.
+         No celular: lista vertical, um card embaixo do outro, sem sticky e sem trava. -->
+    <section id="projetos" class="relative h-auto md:h-[250vh]">
+        <div class="flex flex-col justify-center overflow-hidden bg-[var(--bg)] z-10 py-16 md:sticky md:top-0 md:h-screen md:pt-[128px] md:pb-8">
+            <div class="w-full max-w-screen-2xl mx-auto px-6 md:px-12 mb-4 reveal">
+                <h3 class="title-brandrich text-5xl md:text-[8vw] mb-2">PROJETOS</h3>
+                <h3 class="serif-italic text-3xl md:text-5xl opacity-70">Selecionados</h3>
+            </div>
+
+            <div id="projetos-track" class="flex flex-col md:flex-row gap-10 md:gap-8 px-6 md:px-12 w-full md:w-max will-change-transform mb-4 items-start">
                 
-                <div class="w-[85vw] md:w-[32vw] lg:w-[24vw] shrink-0 flex flex-col group pb-2">
-                    <a href="https://www.behance.net/gallery/251451981/Nautico-Branding-Seafood-Restaurant" target="_blank" class="block w-full aspect-square img-container mb-4">
-                        <img src="images/projeto4.png" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/800x800/d4d4d4/1a1a1a?text=N%C3%A1utico+Restaurante'">
+                <div class="w-full md:w-[32vw] lg:w-[22vw] shrink-0 flex flex-col group pb-2">
+                    <a href="https://www.behance.net/gallery/251451981/Nautico-Branding-Seafood-Restaurant" target="_blank" class="block w-full aspect-square img-container mb-4 shadow-md">
+                        <img src="images/projeto4.png" alt="Náutico Restaurante — Identidade Visual" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/800x800/262626/ededed?text=N%C3%A1utico+Restaurante'">
                     </a>
-                    <span class="text-[9px] font-black uppercase tracking-[0.4em] mb-2 opacity-40">01 / Brand Identity & Web</span>
-                    <h3 class="serif-italic text-2xl md:text-3xl mb-2 leading-tight">Náutico Restaurante</h3>
-                    <p class="font-sans text-xs md:text-sm opacity-70 mb-4 font-light leading-relaxed flex-grow">Identidade visual marcante e desenvolvimento web para um restaurante sofisticado especializado em frutos do mar.</p>
+                    <span class="text-[9px] font-sans font-black uppercase tracking-[0.3em] mb-1 opacity-40">01 / Brand Identity & Web</span>
+                    <h3 class="serif-italic text-3xl md:text-4xl mb-2 leading-tight">Náutico Restaurante</h3>
+                    <p class="font-sans text-sm opacity-70 mb-4 font-light leading-relaxed flex-grow">Identidade visual marcante e desenvolvimento web para restaurante de alta gastronomia.</p>
                     <div class="flex flex-wrap gap-4 mt-auto">
                         <a href="https://www.behance.net/gallery/251451981/Nautico-Branding-Seafood-Restaurant" target="_blank" class="btn-editorial">Explorar Projeto +</a>
                         <a href="https://rviniciusm.github.io/Nautico-restaurante/" target="_blank" class="btn-editorial">Ver Site Real +</a>
                     </div>
                 </div>
 
-                <div class="w-[85vw] md:w-[32vw] lg:w-[24vw] shrink-0 flex flex-col group pb-2">
-                    <a href="https://www.behance.net/gallery/247057833/Tracos-e-Memorias-UIUX-Design-Narrative-Design" target="_blank" class="block w-full aspect-square img-container mb-4">
-                        <img src="images/projeto1.jpg" loading="lazy" class="w-full h-full object-cover object-top" onerror="this.src='https://placehold.co/800x800/d4d4d4/1a1a1a?text=Tra%C3%A7os+%26+Mem%C3%B3rias'">
+                <div class="w-full md:w-[32vw] lg:w-[22vw] shrink-0 flex flex-col group pb-2">
+                    <a href="https://www.behance.net/gallery/247057833/Tracos-e-Memorias-UIUX-Design-Narrative-Design" target="_blank" class="block w-full aspect-square img-container mb-4 shadow-md">
+                        <img src="images/projeto1.jpg" alt="Traços & Memórias — UI/UX" loading="lazy" class="w-full h-full object-cover object-top" onerror="this.src='https://placehold.co/800x800/262626/ededed?text=Tra%C3%A7os+%26+Mem%C3%B3rias'">
                     </a>
-                    <span class="text-[9px] font-black uppercase tracking-[0.4em] mb-2 opacity-40">02 / UI/UX & Narrative Design</span>
-                    <h3 class="serif-italic text-2xl md:text-3xl mb-2 leading-tight">Traços & Memórias</h3>
-                    <p class="font-sans text-xs md:text-sm opacity-70 mb-4 font-light leading-relaxed flex-grow">Narrativas visuais imersivas que preservam a cultura através do design digital cuidadoso e tipografia expressiva.</p>
+                    <span class="text-[9px] font-sans font-black uppercase tracking-[0.3em] mb-1 opacity-40">02 / UI/UX & Narrative</span>
+                    <h3 class="serif-italic text-3xl md:text-4xl mb-2 leading-tight">Traços & Memórias</h3>
+                    <p class="font-sans text-sm opacity-70 mb-4 font-light leading-relaxed flex-grow">Narrativas visuais imersivas preservando a cultura local com tipografia expressiva.</p>
                     <div class="flex flex-wrap gap-4 mt-auto">
                         <a href="https://www.behance.net/gallery/247057833/Tracos-e-Memorias-UIUX-Design-Narrative-Design" target="_blank" class="btn-editorial">Explorar Projeto +</a>
                         <a href="https://rviniciusm.github.io/tracos-e-memorias-tcc/" target="_blank" class="btn-editorial">Ver Site Real +</a>
                     </div>
                 </div>
 
-                <div class="w-[85vw] md:w-[32vw] lg:w-[24vw] shrink-0 flex flex-col group pb-2">
-                    <a href="https://rviniciusm.github.io/portfolio-erisom/" target="_blank" class="block w-full aspect-square img-container mb-4">
-                        <img src="images/erisom77.png" loading="lazy" class="w-full h-full object-cover object-center" onerror="this.src='https://placehold.co/800x800/d4d4d4/1a1a1a?text=Erisom+Fotografia'">
+                <div class="w-full md:w-[32vw] lg:w-[22vw] shrink-0 flex flex-col group pb-2">
+                    <a href="https://rviniciusm.github.io/portfolio-erisom/" target="_blank" class="block w-full aspect-square img-container mb-4 shadow-md">
+                        <img src="images/erisom77.png" alt="Erisom Fotografia — Portfólio" loading="lazy" class="w-full h-full object-cover object-center" onerror="this.src='https://placehold.co/800x800/262626/ededed?text=Erisom+Fotografia'">
                     </a>
-                    <span class="text-[9px] font-black uppercase tracking-[0.4em] mb-2 opacity-40">03 / Web Design & Fotografia</span>
-                    <h3 class="serif-italic text-2xl md:text-3xl mb-2 leading-tight">Erisom Portfolio</h3>
-                    <p class="font-sans text-xs md:text-sm opacity-70 mb-4 font-light leading-relaxed flex-grow">Design elegante e minimalista desenvolvido para dar destaque às obras e a sensibilidade de um fotógrafo profissional.</p>
+                    <span class="text-[9px] font-sans font-black uppercase tracking-[0.3em] mb-1 opacity-40">03 / Web Design</span>
+                    <h3 class="serif-italic text-3xl md:text-4xl mb-2 leading-tight">Erisom Portfolio</h3>
+                    <p class="font-sans text-sm opacity-70 mb-4 font-light leading-relaxed flex-grow">Layout elegante e minimalista projetado para destacar acervo fotográfico.</p>
                     <div class="flex flex-wrap gap-4 mt-auto">
                         <a href="https://rviniciusm.github.io/portfolio-erisom/" target="_blank" class="btn-editorial">Ver Site Real +</a>
                     </div>
                 </div>
 
-                <div class="w-[85vw] md:w-[32vw] lg:w-[24vw] shrink-0 flex flex-col group pb-2">
-                    <a href="https://www.behance.net/gallery/219407775/Definido-GYM-Mobile-App-UIUX-Design" target="_blank" class="block w-full aspect-square img-container mb-4">
-                        <img src="images/projeto2.jpg" loading="lazy" class="w-full h-full object-cover object-center" onerror="this.src='https://placehold.co/800x800/d4d4d4/1a1a1a?text=%2BDefinido+App'">
+                <div class="w-full md:w-[32vw] lg:w-[22vw] shrink-0 flex flex-col group pb-2">
+                    <a href="https://www.behance.net/gallery/219407775/Definido-GYM-Mobile-App-UIUX-Design" target="_blank" class="block w-full aspect-square img-container mb-4 shadow-md">
+                        <img src="images/projeto2.jpg" alt="+Definido App — Interface mobile" loading="lazy" class="w-full h-full object-cover object-center" onerror="this.src='https://placehold.co/800x800/262626/ededed?text=%2BDefinido+App'">
                     </a>
-                    <span class="text-[9px] font-black uppercase tracking-[0.4em] mb-2 opacity-40">04 / Mobile App UI</span>
-                    <h3 class="serif-italic text-2xl md:text-3xl mb-2 leading-tight">+Definido App</h3>
-                    <p class="font-sans text-xs md:text-sm opacity-70 mb-4 font-light leading-relaxed flex-grow">A precisão técnica e usabilidade aplicada ao acompanhamento diário de performance e rotina atlética.</p>
+                    <span class="text-[9px] font-sans font-black uppercase tracking-[0.3em] mb-1 opacity-40">04 / Mobile App UI</span>
+                    <h3 class="serif-italic text-3xl md:text-4xl mb-2 leading-tight">+Definido App</h3>
+                    <p class="font-sans text-sm opacity-70 mb-4 font-light leading-relaxed flex-grow">Interface mobile focada em acompanhamento de treino e métricas de performance.</p>
                     <div class="flex flex-wrap gap-4 mt-auto">
                         <a href="https://www.behance.net/gallery/219407775/Definido-GYM-Mobile-App-UIUX-Design" target="_blank" class="btn-editorial">Explorar Projeto +</a>
                     </div>
                 </div>
 
-                <div class="w-[85vw] md:w-[32vw] lg:w-[24vw] shrink-0 flex flex-col group pb-2">
-                    <a href="https://www.behance.net/gallery/219370645/NIMBO-coffee-bakeryBrand-Identity" target="_blank" class="block w-full aspect-square img-container mb-4">
-                        <img src="images/projeto3.jpg" loading="lazy" class="w-full h-full object-cover object-center" onerror="this.src='https://placehold.co/800x800/d4d4d4/1a1a1a?text=Nimbo+Bakery'">
+                <div class="w-full md:w-[32vw] lg:w-[22vw] shrink-0 flex flex-col group pb-2">
+                    <a href="https://www.behance.net/gallery/219370645/NIMBO-coffee-bakeryBrand-Identity" target="_blank" class="block w-full aspect-square img-container mb-4 shadow-md">
+                        <img src="images/projeto3.jpg" alt="Nimbo Bakery — Identidade Visual" loading="lazy" class="w-full h-full object-cover object-center" onerror="this.src='https://placehold.co/800x800/262626/ededed?text=Nimbo+Bakery'">
                     </a>
-                    <span class="text-[9px] font-black uppercase tracking-[0.4em] mb-2 opacity-40">05 / Brand Identity</span>
-                    <h3 class="serif-italic text-2xl md:text-3xl mb-2 leading-tight">Nimbo Bakery</h3>
-                    <p class="font-sans text-xs md:text-sm opacity-70 mb-4 font-light leading-relaxed flex-grow">Identidade visual divertida que une o carinho do trabalho artesanal à leveza de uma padaria contemporânea.</p>
+                    <span class="text-[9px] font-sans font-black uppercase tracking-[0.3em] mb-1 opacity-40">05 / Brand Identity</span>
+                    <h3 class="serif-italic text-3xl md:text-4xl mb-2 leading-tight">Nimbo Bakery</h3>
+                    <p class="font-sans text-sm opacity-70 mb-4 font-light leading-relaxed flex-grow">Identidade de marca contemporânea unindo o artesanal ao universo digital.</p>
                     <div class="flex flex-wrap gap-4 mt-auto">
                         <a href="https://www.behance.net/gallery/219370645/NIMBO-coffee-bakeryBrand-Identity" target="_blank" class="btn-editorial">Explorar Projeto +</a>
                     </div>
@@ -464,155 +712,187 @@
         </div>
     </section>
 
-    <!-- Sobre o Designer -->
-    <section id="sobre" class="py-32 border-t border-black/10">
-        <div class="max-w-screen-2xl mx-auto px-6 md:px-16 grid grid-cols-1 md:grid-cols-12 gap-16 md:gap-20 items-center">
-            <div class="md:col-span-5 reveal">
-                <div class="img-container aspect-square shadow-xl">
-                    <img src="images/perfil.jpg" loading="lazy" alt="Vinicius" class="w-full h-full object-cover transition-all duration-1000" onerror="this.src='https://placehold.co/800x800/d4d4d4/1a1a1a?text=Perfil'">
+    <!-- Marquee de Divisão — agora abaixo dos Projetos -->
+    <section class="py-6 border-t border-white/10">
+        <div class="marquee-wrapper">
+            <div class="marquee reveal">
+                <div class="marquee-content">
+                    <div class="marquee-item">
+                        <span class="serif-italic text-4xl md:text-6xl ml-4">Identidade Visual</span>
+                        <span class="text-[var(--text)] text-xl font-title">·</span>
+                        <img src="images/projeto4.png" alt="" class="marquee-img" onerror="this.src='https://placehold.co/100/ededed/111111?text=I'">
+                    </div>
+                    <div class="marquee-item">
+                        <span class="serif-italic text-4xl md:text-6xl ml-4">UI/UX Design</span>
+                        <span class="text-[var(--text)] text-xl font-title">·</span>
+                        <img src="images/projeto1.jpg" alt="" class="marquee-img" onerror="this.src='https://placehold.co/100/ededed/111111?text=U'">
+                    </div>
+                    <div class="marquee-item">
+                        <span class="serif-italic text-4xl md:text-6xl ml-4">Branding Strategy</span>
+                        <span class="text-[var(--text)] text-xl font-title">·</span>
+                        <img src="images/projeto3.jpg" alt="" class="marquee-img" onerror="this.src='https://placehold.co/100/ededed/111111?text=B'">
+                    </div>
+                    <div class="marquee-item">
+                        <span class="serif-italic text-4xl md:text-6xl ml-4">Mídias Sociais</span>
+                        <span class="text-[var(--text)] text-xl font-title">·</span>
+                        <img src="images/story3.jpg" alt="" class="marquee-img" onerror="this.src='https://placehold.co/100/ededed/111111?text=S'">
+                    </div>
+                    
+                    <div class="marquee-item">
+                        <span class="serif-italic text-4xl md:text-6xl ml-4">Identidade Visual</span>
+                        <span class="text-[var(--text)] text-xl font-title">·</span>
+                        <img src="images/projeto4.png" alt="" class="marquee-img" onerror="this.src='https://placehold.co/100/ededed/111111?text=I'">
+                    </div>
+                    <div class="marquee-item">
+                        <span class="serif-italic text-4xl md:text-6xl ml-4">UI/UX Design</span>
+                        <span class="text-[var(--text)] text-xl font-title">·</span>
+                        <img src="images/projeto1.jpg" alt="" class="marquee-img" onerror="this.src='https://placehold.co/100/ededed/111111?text=U'">
+                    </div>
+                    <div class="marquee-item">
+                        <span class="serif-italic text-4xl md:text-6xl ml-4">Branding Strategy</span>
+                        <span class="text-[var(--text)] text-xl font-title">·</span>
+                        <img src="images/projeto3.jpg" alt="" class="marquee-img" onerror="this.src='https://placehold.co/100/ededed/111111?text=B'">
+                    </div>
+                    <div class="marquee-item">
+                        <span class="serif-italic text-4xl md:text-6xl ml-4">Mídias Sociais</span>
+                        <span class="text-[var(--text)] text-xl font-title">·</span>
+                        <img src="images/story3.jpg" alt="" class="marquee-img" onerror="this.src='https://placehold.co/100/ededed/111111?text=S'">
+                    </div>
                 </div>
-            </div>
-            <div class="md:col-span-6 md:col-start-7 reveal">
-                <span class="text-[11px] font-black uppercase tracking-[0.5em] text-black opacity-40 mb-6 block">O Designer</span>
-                <h2 class="title-huge text-6xl md:text-8xl mb-8 whitespace-normal">VINICIUS<br>MEDEIROS</h2>
-                <div class="serif-italic text-3xl md:text-5xl mb-8 leading-snug">"Criando identidades e soluções visuais que dão vida a projetos."</div>
-                <p class="font-sans text-lg opacity-70 max-w-xl leading-relaxed font-light">Formado em <span class="text-black font-black uppercase tracking-widest text-xs">Design Digital</span> pela <span class="text-black font-black underline decoration-[var(--neon)] decoration-2">UFC</span>, busco sempre o impacto estético alinhado à funcionalidade através do design editorial e digital.</p>
             </div>
         </div>
     </section>
 
-    <!-- Trajetória Profissional -->
-    <section class="py-32 bg-[#141414] text-white overflow-hidden">
+    <!-- Background Profissional — acordeão como o "SOCIAL MEDIA SERVICES" do Brand Rich:
+         cada linha é uma gaveta, clica no + e abre virando −, clica no − e recolhe -->
+    <section id="trajetoria" class="py-20 md:py-24 bg-[#141414] text-white overflow-hidden">
         <div class="max-w-screen-2xl mx-auto px-6 md:px-16">
-            <div class="mb-20 md:mb-24 reveal border-b border-white/20 pb-10">
-                <h2 class="title-huge text-5xl md:text-[8vw] leading-none mb-4 whitespace-normal">TRAJETÓRIA</h2>
-                <p class="serif-italic text-3xl md:text-5xl text-[var(--neon)]">Background Profissional</p>
+            <div class="mb-12 md:mb-16 reveal border-b border-white/20 pb-8">
+                <h2 class="title-brandrich text-5xl md:text-[8vw] mb-4 whitespace-normal">TRAJETORIA</h2>
+                <p class="serif-italic text-3xl md:text-5xl text-white">Background Profissional</p>
             </div>
-            <div class="reveal">
-                <div class="exp-row grid grid-cols-1 md:grid-cols-12 items-baseline gap-4 md:gap-0">
-                    <div class="md:col-span-3 text-[10px] font-black uppercase tracking-widest text-[var(--neon)]">Formação</div>
-                    <div class="md:col-span-6"><h4 class="font-serif italic text-3xl md:text-4xl mb-2">Design Digital</h4><p class="font-sans text-lg text-white/70 font-light">Universidade Federal do Ceará (UFC)</p></div>
-                    <div class="md:col-span-3 md:text-right text-[10px] font-black uppercase tracking-widest text-white/40 mt-4 md:mt-0">Graduado</div>
+            <div class="reveal border-t border-white/15">
+                <div class="acordeao-item">
+                    <button type="button" class="acordeao-botao" onclick="alternarAcordeao(this)" aria-expanded="false">
+                        <span class="flex flex-col md:flex-row md:items-baseline gap-1 md:gap-4 min-w-0">
+                            <span class="font-serif italic text-2xl md:text-3xl">Design Digital</span>
+                            <span class="text-[10px] font-sans font-black uppercase tracking-widest opacity-60">Universidade Federal do Ceará · Graduado</span>
+                        </span>
+                        <span class="acordeao-icone" aria-hidden="true"></span>
+                    </button>
+                    <div class="acordeao-conteudo">
+                        <div class="acordeao-conteudo-inner">
+                            <p class="font-sans text-base md:text-lg leading-relaxed opacity-80">Bacharelado em Design Digital pela Universidade Federal do Ceará, concluído em 2026. TCC: Traços e Memórias, um mapa afetivo interativo que preserva a cultura local.</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="exp-row grid grid-cols-1 md:grid-cols-12 items-baseline gap-4 md:gap-0">
-                    <div class="md:col-span-3 text-[10px] font-black uppercase tracking-widest text-[var(--neon)]">JIT Technology</div>
-                    <div class="md:col-span-6"><h4 class="font-serif italic text-3xl md:text-4xl mb-2">Designer Digital</h4><p class="font-sans text-lg text-white/70 font-light"> Web designer e Asistente de Marketing (2025)</p></div>
-                    <div class="md:col-span-3 md:text-right text-[10px] font-black uppercase tracking-widest text-white/40 mt-4 md:mt-0">Exp. 01</div>
+                <div class="acordeao-item">
+                    <button type="button" class="acordeao-botao" onclick="alternarAcordeao(this)" aria-expanded="false">
+                        <span class="flex flex-col md:flex-row md:items-baseline gap-1 md:gap-4 min-w-0">
+                            <span class="font-serif italic text-2xl md:text-3xl">Designer Digital</span>
+                            <span class="text-[10px] font-sans font-black uppercase tracking-widest opacity-60">JIT Technology · 2025</span>
+                        </span>
+                        <span class="acordeao-icone" aria-hidden="true"></span>
+                    </button>
+                    <div class="acordeao-conteudo">
+                        <div class="acordeao-conteudo-inner">
+                            <p class="font-sans text-base md:text-lg leading-relaxed opacity-80">Designer Digital e Social Media na JIT Technology, de janeiro a dezembro de 2025. Interfaces, prototipagem e materiais para a OK Intercâmbio, além de e-books e peças para social media.</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="exp-row grid grid-cols-1 md:grid-cols-12 items-baseline gap-4 md:gap-0">
-                    <div class="md:col-span-3 text-[10px] font-black uppercase tracking-widest text-[var(--neon)]">Cego Aderaldo</div>
-                    <div class="md:col-span-6"><h4 class="font-serif italic text-3xl md:text-4xl mb-2">UX/UI Designer</h4><p class="font-sans text-lg text-white/70 font-light">Equipe Multidisciplinar (2023)</p></div>
-                    <div class="md:col-span-3 md:text-right text-[10px] font-black uppercase tracking-widest text-white/40 mt-4 md:mt-0">Exp. 02</div>
+                <div class="acordeao-item">
+                    <button type="button" class="acordeao-botao" onclick="alternarAcordeao(this)" aria-expanded="false">
+                        <span class="flex flex-col md:flex-row md:items-baseline gap-1 md:gap-4 min-w-0">
+                            <span class="font-serif italic text-2xl md:text-3xl">UX/UI Designer</span>
+                            <span class="text-[10px] font-sans font-black uppercase tracking-widest opacity-60">Cego Aderaldo · 2023</span>
+                        </span>
+                        <span class="acordeao-icone" aria-hidden="true"></span>
+                    </button>
+                    <div class="acordeao-conteudo">
+                        <div class="acordeao-conteudo-inner">
+                            <p class="font-sans text-base md:text-lg leading-relaxed opacity-80">Designer Digital com foco em UX/UI na Casa de Saberes Cego Aderaldo, de março a junho de 2023, trabalhando em equipe multidisciplinar.</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="exp-row grid grid-cols-1 md:grid-cols-12 items-baseline gap-4 md:gap-0 border-none">
-                    <div class="md:col-span-3 text-[10px] font-black uppercase tracking-widest text-[var(--neon)]">AMMA</div>
-                    <div class="md:col-span-6"><h4 class="font-serif italic text-3xl md:text-4xl mb-2">Digital Design</h4><p class="font-sans text-lg text-white/70 font-light">Branding Institucional (2022)</p></div>
-                    <div class="md:col-span-3 md:text-right text-[10px] font-black uppercase tracking-widest text-white/40 mt-4 md:mt-0">Exp. 03</div>
+                <div class="acordeao-item">
+                    <button type="button" class="acordeao-botao" onclick="alternarAcordeao(this)" aria-expanded="false">
+                        <span class="flex flex-col md:flex-row md:items-baseline gap-1 md:gap-4 min-w-0">
+                            <span class="font-serif italic text-2xl md:text-3xl">Digital Design</span>
+                            <span class="text-[10px] font-sans font-black uppercase tracking-widest opacity-60">AMMA · 2022</span>
+                        </span>
+                        <span class="acordeao-icone" aria-hidden="true"></span>
+                    </button>
+                    <div class="acordeao-conteudo">
+                        <div class="acordeao-conteudo-inner">
+                            <p class="font-sans text-base md:text-lg leading-relaxed opacity-80">Designer Digital na Autarquia Municipal do Meio Ambiente (AMMA), de julho a dezembro de 2022. Branding institucional e peças para comunicação pública.</p>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </section>
-                                                                                                                                                                                                                                        
-    <!-- MULTI-CLIENT SOCIAL MEDIA (Sticky Horizontal Scroll) -->
-    <section id="social" class="relative h-[600vh] bg-[#dfdfdf]">
-        <div class="sticky top-0 h-screen flex flex-col justify-center overflow-hidden z-10 py-10">
-            
-            <div class="max-w-screen-2xl mx-auto px-6 md:px-16 w-full mb-6 md:mb-10 reveal">
-                <h2 class="title-huge text-4xl md:text-6xl mb-2 whitespace-normal">SOCIAL MEDIA</h2>
-                <p class="serif-italic text-2xl md:text-3xl opacity-70">Estratégia & Conteúdo Digital</p>
-            </div>
-            
-            <div id="social-track" class="flex gap-4 md:gap-8 px-6 md:px-16 w-max will-change-transform items-center">
-                
-                <!-- ====== 1. MANSIONS CONSTRUTORA ====== -->
-                <div class="w-[80vw] md:w-[22vw] shrink-0 flex flex-col gap-2 border-l-4 border-[var(--neon)] pl-4 md:pl-6 mr-2 md:mr-4">
-                    <h3 class="font-sans font-black text-2xl md:text-4xl uppercase tracking-tighter">Mansions</h3>
-                    <span class="text-[10px] uppercase tracking-widest opacity-60">Construção Civil</span>
-                </div>
-                <!-- Reels -->
-                <div class="w-[75vw] md:w-[18vw] shrink-0 aspect-[9/16] img-container shadow-lg"><img src="images/Instagram story - 6.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x711/c0c0c0/1a1a1a?text=Reels'"></div>
-                <div class="w-[75vw] md:w-[18vw] shrink-0 aspect-[9/16] img-container shadow-lg"><img src="images/Instagram story - 7.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x711/c0c0c0/1a1a1a?text=Reels'"></div>
-                <!-- Carrossel (Agrupado para ficar colado) -->
-                <div class="flex gap-1 shrink-0">
-                    <div class="w-[85vw] md:w-[24vw] shrink-0 aspect-[4/5] img-container shadow-lg"><img src="images/Carrossel  Mansions Construtora 1.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/800x1000/c0c0c0/1a1a1a?text=Slide+1'"></div>
-                    <div class="w-[85vw] md:w-[24vw] shrink-0 aspect-[4/5] img-container shadow-lg"><img src="images/Carrossel  Mansions Construtora 2.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/800x1000/c0c0c0/1a1a1a?text=Slide+2'"></div>
-                    <div class="w-[85vw] md:w-[24vw] shrink-0 aspect-[4/5] img-container shadow-lg"><img src="images/Carrossel  Mansions Construtora 3.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/800x1000/c0c0c0/1a1a1a?text=Slide+3'"></div>
-                    <div class="w-[85vw] md:w-[24vw] shrink-0 aspect-[4/5] img-container shadow-lg"><img src="images/Carrossel  Mansions Construtora 4.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/800x1000/c0c0c0/1a1a1a?text=Slide+4'"></div>
-                    <div class="w-[85vw] md:w-[24vw] shrink-0 aspect-[4/5] img-container shadow-lg"><img src="images/Carrossel  Mansions Construtora 5.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/800x1000/c0c0c0/1a1a1a?text=Slide+5'"></div>
-                </div>
-
-                <!-- Divisor Fino -->
-                <div class="w-16 md:w-32 shrink-0 flex items-center justify-center"><div class="w-px h-32 bg-black/10"></div></div>
-
-                <!-- ====== 2. ALESSANDRA HASCHER ====== -->
-                <div class="w-[80vw] md:w-[22vw] shrink-0 flex flex-col gap-2 border-l-4 border-[var(--neon)] pl-4 md:pl-6 mr-2 md:mr-4">
-                    <h3 class="font-sans font-black text-2xl md:text-4xl uppercase tracking-tighter">Alessandra Hascher</h3>
-                    <span class="text-[10px] uppercase tracking-widest opacity-60">Terapeuta de Tarot</span>
-                </div>
-                <!-- Reels -->
-                <div class="w-[75vw] md:w-[18vw] shrink-0 aspect-[9/16] img-container shadow-lg"><img src="images/Instagram story - 1.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x711/c0c0c0/1a1a1a?text=Reels'"></div>
-                <div class="w-[75vw] md:w-[18vw] shrink-0 aspect-[9/16] img-container shadow-lg"><img src="images/Instagram story - 2.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x711/c0c0c0/1a1a1a?text=Reels'"></div>
-                <!-- Carrossel (Agrupado para ficar colado) -->
-                <div class="flex gap-1 shrink-0">
-                    <div class="w-[85vw] md:w-[24vw] shrink-0 aspect-[4/5] img-container shadow-lg"><img src="images/Carrossel tarot 1.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/800x1000/c0c0c0/1a1a1a?text=Slide+1'"></div>
-                    <div class="w-[85vw] md:w-[24vw] shrink-0 aspect-[4/5] img-container shadow-lg"><img src="images/Carrossel tarot 2.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/800x1000/c0c0c0/1a1a1a?text=Slide+2'"></div>
-                    <div class="w-[85vw] md:w-[24vw] shrink-0 aspect-[4/5] img-container shadow-lg"><img src="images/Carrossel tarot 3.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/800x1000/c0c0c0/1a1a1a?text=Slide+3'"></div>
-                    <div class="w-[85vw] md:w-[24vw] shrink-0 aspect-[4/5] img-container shadow-lg"><img src="images/Carrossel tarot 4.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/800x1000/c0c0c0/1a1a1a?text=Slide+4'"></div>
-                    <div class="w-[85vw] md:w-[24vw] shrink-0 aspect-[4/5] img-container shadow-lg"><img src="images/Carrossel tarot 5.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/800x1000/c0c0c0/1a1a1a?text=Slide+5'"></div>
-                </div>
-
-                <!-- Divisor Fino -->
-                <div class="w-16 md:w-32 shrink-0 flex items-center justify-center"><div class="w-px h-32 bg-black/10"></div></div>
-
-                <!-- ====== 3. STUDIO LUZ ====== -->
-                <div class="w-[80vw] md:w-[22vw] shrink-0 flex flex-col gap-2 border-l-4 border-[var(--neon)] pl-4 md:pl-6 mr-2 md:mr-4">
-                    <h3 class="font-sans font-black text-2xl md:text-4xl uppercase tracking-tighter">Studio Luz</h3>
-                    <span class="text-[10px] uppercase tracking-widest opacity-60">Branding e Marketing</span>
-                </div>
-                <!-- Reels -->
-                <div class="w-[75vw] md:w-[18vw] shrink-0 aspect-[9/16] img-container shadow-lg"><img src="images/Instagram story - 4.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x711/c0c0c0/1a1a1a?text=Reels'"></div>
-                <div class="w-[75vw] md:w-[18vw] shrink-0 aspect-[9/16] img-container shadow-lg"><img src="images/Instagram story - 5.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x711/c0c0c0/1a1a1a?text=Reels'"></div>
-                <!-- Carrossel (Agrupado para ficar colado) -->
-                <div class="flex gap-1 shrink-0">
-                    <div class="w-[85vw] md:w-[24vw] shrink-0 aspect-[4/5] img-container shadow-lg"><img src="images/Carrossel luz 1.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/800x1000/c0c0c0/1a1a1a?text=Slide+1'"></div>
-                    <div class="w-[85vw] md:w-[24vw] shrink-0 aspect-[4/5] img-container shadow-lg"><img src="images/Carrossel luz 2.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/800x1000/c0c0c0/1a1a1a?text=Slide+2'"></div>
-                    <div class="w-[85vw] md:w-[24vw] shrink-0 aspect-[4/5] img-container shadow-lg"><img src="images/Carrossel luz 3.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/800x1000/c0c0c0/1a1a1a?text=Slide+3'"></div>
-                    <div class="w-[85vw] md:w-[24vw] shrink-0 aspect-[4/5] img-container shadow-lg"><img src="images/Carrossel luz 4.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/800x1000/c0c0c0/1a1a1a?text=Slide+4'"></div>
-                    <div class="w-[85vw] md:w-[24vw] shrink-0 aspect-[4/5] img-container shadow-lg"><img src="images/Carrossel luz 5.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/800x1000/c0c0c0/1a1a1a?text=Slide+5'"></div>
-                </div>
-
-                <!-- Divisor Fino -->
-                <div class="w-16 md:w-32 shrink-0 flex items-center justify-center"><div class="w-px h-32 bg-black/10"></div></div>
-
-                <!-- ====== 4. OK INTERCÂMBIO ====== -->
-                <div class="w-[80vw] md:w-[22vw] shrink-0 flex flex-col gap-2 border-l-4 border-[var(--neon)] pl-4 md:pl-6 mr-2 md:mr-4">
-                    <h3 class="font-sans font-black text-2xl md:text-4xl uppercase tracking-tighter">OK Intercâmbio</h3>
-                    <span class="text-[10px] uppercase tracking-widest opacity-60">Social Media & Conteúdo</span>
-                </div>
-                <!-- Stories -->
-                <div class="w-[75vw] md:w-[18vw] shrink-0 aspect-[9/16] img-container shadow-lg"><img src="images/story1.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x711/c0c0c0/1a1a1a?text=Story'"></div>
-                <div class="w-[75vw] md:w-[18vw] shrink-0 aspect-[9/16] img-container shadow-lg"><img src="images/story2.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x711/c0c0c0/1a1a1a?text=Story'"></div>
-                <div class="w-[75vw] md:w-[18vw] shrink-0 aspect-[9/16] img-container shadow-lg"><img src="images/story3.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x711/c0c0c0/1a1a1a?text=Story'"></div>
-                <div class="w-[75vw] md:w-[18vw] shrink-0 aspect-[9/16] img-container shadow-lg"><img src="images/story4.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x711/c0c0c0/1a1a1a?text=Story'"></div>
-                <div class="w-[75vw] md:w-[18vw] shrink-0 aspect-[9/16] img-container shadow-lg"><img src="images/story5.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x711/c0c0c0/1a1a1a?text=Story'"></div>
-                <!-- Posts (Agrupado para ficar colado) -->
-                <div class="flex gap-1 shrink-0">
-                    <div class="w-[85vw] md:w-[24vw] shrink-0 aspect-[4/5] img-container shadow-lg"><img src="images/post1.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/800x1000/c0c0c0/1a1a1a?text=Post'"></div>
-                    <div class="w-[85vw] md:w-[24vw] shrink-0 aspect-[4/5] img-container shadow-lg"><img src="images/post2.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/800x1000/c0c0c0/1a1a1a?text=Post'"></div>
-                    <div class="w-[85vw] md:w-[24vw] shrink-0 aspect-[4/5] img-container shadow-lg"><img src="images/post3.jpg" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/800x1000/c0c0c0/1a1a1a?text=Post'"></div>
-                </div>
-
-                <!-- Espaço extra no final para a rolagem terminar lindamente -->
-                <div class="w-[10vw] shrink-0"></div>
             </div>
         </div>
     </section>
 
-    <!-- Archive -->
-    <section id="arquivo" class="py-32 bg-[#111111] text-white">
-        <div class="max-w-screen-2xl mx-auto px-6 md:px-16 mb-20 reveal border-b border-white/20 pb-10">
-            <h2 class="title-huge text-5xl md:text-[8vw] leading-none mb-2 whitespace-normal">POSTER<br><span class="serif-italic text-[var(--neon)]">DESIGN</span></h2>
-            <p class="mt-8 text-[10px] uppercase tracking-[0.5em] opacity-60">Explorações em Grids (09)</p>
+    <!-- Social Media — refeita como a página de social do Brand Rich:
+         frase grande em cima, itálica centralizada, 3 stories parados e
+         centralizados como fotos, cada um com seu botão 1/2 dentro do
+         container, na parte de baixo. Sem posts, sem carrosséis e sem scroll horizontal.
+         No celular os stories empilham em 1 coluna, com tamanho de story de verdade. -->
+    <section id="social" class="py-20 md:py-24 bg-[#1A1A1A]">
+        <div class="w-full px-5 md:px-6">
+            <h2 class="title-brandrich mb-8 md:mb-12 reveal" style="font-size: clamp(2.6rem, 5.8vw, 6.5rem);">SUA MARCA VIVA NO FEED TODO DIA, VIRANDO POST EM CONVERSA E SEGUIDOR EM CLIENTE.</h2>
+            <p class="serif-italic text-center mb-12 md:mb-16 reveal" style="font-size: clamp(1.8rem, 3.5vw, 3.2rem);">POV: o seu novo feed</p>
+
+            <div class="grid grid-cols-1 gap-10 sm:grid-cols-3 sm:gap-3 md:gap-6 max-w-[340px] sm:max-w-6xl mx-auto reveal">
+                <figure>
+                    <div class="img-container aspect-[9/16]">
+                        <img id="story-ok" src="images/story1.jpg" alt="OK Intercâmbio — story" loading="lazy" class="story-img w-full h-full object-cover" onerror="this.src='https://placehold.co/400x711/262626/ededed?text=Story'">
+                        <div class="absolute bottom-4 left-1/2 -translate-x-1/2 z-[3] flex bg-[#EDEDED] rounded-full p-1 gap-1 shadow-lg">
+                            <button id="btn-ok-a" type="button" onclick="trocarStory('ok', 0)" class="btn-story-mini ativo" aria-label="Mostrar o primeiro story da OK Intercâmbio">1</button>
+                            <button id="btn-ok-b" type="button" onclick="trocarStory('ok', 1)" class="btn-story-mini" aria-label="Mostrar o segundo story da OK Intercâmbio">2</button>
+                        </div>
+                    </div>
+                    <figcaption class="text-center mt-3">
+                        <span class="font-title text-sm md:text-base uppercase">OK Intercâmbio</span>
+                        <span class="block text-[10px] font-sans uppercase tracking-widest opacity-60 mt-1">Intercâmbio</span>
+                    </figcaption>
+                </figure>
+                <figure>
+                    <div class="img-container aspect-[9/16]">
+                        <img id="story-mansions" src="images/Instagram story - 6.jpg" alt="Mansions — story" loading="lazy" class="story-img w-full h-full object-cover" onerror="this.src='https://placehold.co/400x711/262626/ededed?text=Story'">
+                        <div class="absolute bottom-4 left-1/2 -translate-x-1/2 z-[3] flex bg-[#EDEDED] rounded-full p-1 gap-1 shadow-lg">
+                            <button id="btn-mansions-a" type="button" onclick="trocarStory('mansions', 0)" class="btn-story-mini ativo" aria-label="Mostrar o primeiro story da Mansions">1</button>
+                            <button id="btn-mansions-b" type="button" onclick="trocarStory('mansions', 1)" class="btn-story-mini" aria-label="Mostrar o segundo story da Mansions">2</button>
+                        </div>
+                    </div>
+                    <figcaption class="text-center mt-3">
+                        <span class="font-title text-sm md:text-base uppercase">Mansions</span>
+                        <span class="block text-[10px] font-sans uppercase tracking-widest opacity-60 mt-1">Construção Civil</span>
+                    </figcaption>
+                </figure>
+                <figure>
+                    <div class="img-container aspect-[9/16]">
+                        <img id="story-alessandra" src="images/Instagram story - 1.jpg" alt="Alessandra Hascher — story" loading="lazy" class="story-img w-full h-full object-cover" onerror="this.src='https://placehold.co/400x711/262626/ededed?text=Story'">
+                        <div class="absolute bottom-4 left-1/2 -translate-x-1/2 z-[3] flex bg-[#EDEDED] rounded-full p-1 gap-1 shadow-lg">
+                            <button id="btn-alessandra-a" type="button" onclick="trocarStory('alessandra', 0)" class="btn-story-mini ativo" aria-label="Mostrar o primeiro story da Alessandra Hascher">1</button>
+                            <button id="btn-alessandra-b" type="button" onclick="trocarStory('alessandra', 1)" class="btn-story-mini" aria-label="Mostrar o segundo story da Alessandra Hascher">2</button>
+                        </div>
+                    </div>
+                    <figcaption class="text-center mt-3">
+                        <span class="font-title text-sm md:text-base uppercase">Alessandra Hascher</span>
+                        <span class="block text-[10px] font-sans uppercase tracking-widest opacity-60 mt-1">Terapeuta de Tarot</span>
+                    </figcaption>
+                </figure>
+            </div>
+        </div>
+    </section>
+
+    <!-- Archive — continua preto, como antes. Cabeçalho no mesmo padrão da seção
+         Social Media: frase grande em cima, itálica centralizada embaixo. -->
+    <section id="arquivo" class="py-20 md:py-24 bg-[#111111] text-white">
+        <div class="w-full px-5 md:px-6 mb-12 md:mb-16 reveal">
+            <h2 class="title-brandrich mb-8 md:mb-12" style="font-size: clamp(2.6rem, 5.8vw, 6.5rem);">UM LABORATÓRIO DE ESTILOS</h2>
+            <p class="serif-italic text-center" style="font-size: clamp(1.8rem, 3.5vw, 3.2rem);">Cada pôster explora uma estética diferente, do comercial ao artístico, do editorial ao ilustrado.</p>
+            <p class="text-center mt-4 text-[10px] font-sans uppercase tracking-[0.5em] opacity-60">09 peças</p>
         </div>
         <div class="max-w-screen-2xl mx-auto grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4 px-2 md:px-16">
             <div class="aspect-[1/1.414] img-container reveal"><img src="images/poster1.png" loading="lazy" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/800x1131/333/fff?text=Poster'"></div>
@@ -628,28 +908,28 @@
     </section>
 
     <!-- Toolstack -->
-    <section class="py-32 px-6 md:px-16">
+    <section class="py-20 md:py-24 px-6 md:px-16">
         <div class="max-w-screen-2xl mx-auto">
-            <div class="mb-20 reveal border-b border-black/10 pb-10">
-                <h2 class="title-huge text-5xl md:text-7xl mb-2 whitespace-normal">SKILLS</h2>
+            <div class="mb-12 reveal border-b border-white/10 pb-10">
+                <h2 class="title-brandrich text-5xl md:text-7xl mb-2 whitespace-normal">SKILLS</h2>
                 <p class="serif-italic text-3xl md:text-4xl opacity-60">Sistemas de Produção</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-x-20 reveal">
-                <div class="tool-card"><div class="flex justify-between items-baseline"><h4 class="font-sans font-black text-2xl md:text-3xl uppercase tracking-tighter tool-name">FIGMA</h4><span class="serif-italic text-xl opacity-50">Interface</span></div></div>
-                <div class="tool-card"><div class="flex justify-between items-baseline"><h4 class="font-sans font-black text-2xl md:text-3xl uppercase tracking-tighter tool-name">ILLUSTRATOR</h4><span class="serif-italic text-xl opacity-50">Vetorização</span></div></div>
-                <div class="tool-card"><div class="flex justify-between items-baseline"><h4 class="font-sans font-black text-2xl md:text-3xl uppercase tracking-tighter tool-name">PHOTOSHOP</h4><span class="serif-italic text-xl opacity-50">Edição Visual</span></div></div>
-                <div class="tool-card"><div class="flex justify-between items-baseline"><h4 class="font-sans font-black text-2xl md:text-3xl uppercase tracking-tighter tool-name">INDESIGN</h4><span class="serif-italic text-xl opacity-50">Editorial</span></div></div>
-                <div class="tool-card"><div class="flex justify-between items-baseline"><h4 class="font-sans font-black text-2xl md:text-3xl uppercase tracking-tighter tool-name">CAPCUT</h4><span class="serif-italic text-xl opacity-50">Vídeos</span></div></div>
-                <div class="tool-card"><div class="flex justify-between items-baseline"><h4 class="font-sans font-black text-2xl md:text-3xl uppercase tracking-tighter tool-name">CANVA</h4><span class="serif-italic text-xl opacity-50">Social Media</span></div></div>
-                <div class="tool-card"><div class="flex justify-between items-baseline"><h4 class="font-sans font-black text-2xl md:text-3xl uppercase tracking-tighter tool-name">PREMIERE</h4><span class="serif-italic text-xl opacity-50">Vídeos</span></div></div>
-                <div class="tool-card border-b border-black/10"><div class="flex justify-between items-baseline"><h4 class="font-sans font-black text-2xl md:text-3xl uppercase tracking-tighter tool-name">GEMINI AI</h4><span class="serif-italic text-xl opacity-50">Estratégia</span></div></div>
+                <div class="tool-card"><div class="flex justify-between items-baseline"><h4 class="font-title text-2xl md:text-3xl uppercase tracking-tighter tool-name">FIGMA</h4><span class="serif-italic text-xl opacity-50">Interface</span></div></div>
+                <div class="tool-card"><div class="flex justify-between items-baseline"><h4 class="font-title text-2xl md:text-3xl uppercase tracking-tighter tool-name">ILLUSTRATOR</h4><span class="serif-italic text-xl opacity-50">Vetorização</span></div></div>
+                <div class="tool-card"><div class="flex justify-between items-baseline"><h4 class="font-title text-2xl md:text-3xl uppercase tracking-tighter tool-name">PHOTOSHOP</h4><span class="serif-italic text-xl opacity-50">Edição Visual</span></div></div>
+                <div class="tool-card"><div class="flex justify-between items-baseline"><h4 class="font-title text-2xl md:text-3xl uppercase tracking-tighter tool-name">INDESIGN</h4><span class="serif-italic text-xl opacity-50">Editorial</span></div></div>
+                <div class="tool-card"><div class="flex justify-between items-baseline"><h4 class="font-title text-2xl md:text-3xl uppercase tracking-tighter tool-name">CAPCUT</h4><span class="serif-italic text-xl opacity-50">Vídeos</span></div></div>
+                <div class="tool-card"><div class="flex justify-between items-baseline"><h4 class="font-title text-2xl md:text-3xl uppercase tracking-tighter tool-name">CANVA</h4><span class="serif-italic text-xl opacity-50">Social Media</span></div></div>
+                <div class="tool-card"><div class="flex justify-between items-baseline"><h4 class="font-title text-2xl md:text-3xl uppercase tracking-tighter tool-name">INKSCAPE</h4><span class="serif-italic text-xl opacity-50">Vetores Open</span></div></div>
+                <div class="tool-card border-b border-white/10"><div class="flex justify-between items-baseline"><h4 class="font-title text-2xl md:text-3xl uppercase tracking-tighter tool-name">INTELIGÊNCIA ARTIFICIAL</h4><span class="serif-italic text-xl opacity-50">Estratégia</span></div></div>
             </div>
         </div>
-    </section>                                                                                                                                                                                                                                                                        
+    </section>
 
-    <!-- Footer -->
-    <footer id="contato" class="w-full pt-10">
-        <div class="bg-[var(--neon)] w-full py-6 md:py-8 px-6 md:px-16 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 text-black border-y border-black/10">
+    <footer id="contato" class="w-full pt-6">
+        <!-- Faixa verde neon, como a do Brand Rich -->
+        <div class="bg-[var(--lime)] w-full py-5 md:py-6 px-6 md:px-16 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 text-black border-y border-black/10">
             <p class="font-sans text-sm md:text-base font-medium">Aceitando novos projetos com foco em <span class="italic font-serif">qualidade visual</span>.</p>
             <a href="https://wa.me/5588996909768?text=Olá%20Vinicius!%20Gostaria%20de%20falar%20sobre%20um%20novo%20projeto." target="_blank" class="flex flex-row items-center gap-8 w-full md:w-auto text-sm font-sans border-b border-black pb-1 hover:opacity-50 transition-opacity">
                 <span class="font-medium opacity-60 hidden md:block">Via WhatsApp</span>
@@ -657,32 +937,32 @@
             </a>
         </div>
 
-        <div class="max-w-screen-2xl mx-auto px-6 md:px-16 py-20 flex flex-col md:flex-row justify-between items-start gap-12 md:gap-20">
+        <div class="max-w-screen-2xl mx-auto px-6 md:px-16 py-12 md:py-16 flex flex-col md:flex-row justify-between items-start gap-12 md:gap-20">
             <div class="min-w-[200px]">
-                <h4 class="title-huge text-4xl tracking-tighter uppercase mb-2 whitespace-normal">Vinicius<br>Medeiros</h4>
+                <h4 class="title-brandrich text-4xl tracking-tighter uppercase mb-2 whitespace-normal">Vinicius<br>Medeiros</h4>
                 <p class="serif-italic text-xl opacity-70">Design Plural</p>
             </div>
 
             <div class="flex flex-col space-y-8">
                 <div>
-                    <span class="text-[9px] font-black uppercase tracking-widest opacity-40 block mb-2">E-mail</span>
-                    <a href="mailto:medeirosvinicius888@gmail.com" class="block text-sm hover:underline font-light">medeirosvinicius888@gmail.com</a>
+                    <span class="text-[9px] font-sans font-black uppercase tracking-widest opacity-40 block mb-2">E-mail</span>
+                    <a href="mailto:medeirosvinicius888@gmail.com" class="block font-sans text-sm hover:underline font-medium">medeirosvinicius888@gmail.com</a>
                 </div>
                 <div>
-                    <span class="text-[9px] font-black uppercase tracking-widest opacity-40 block mb-2">Telefone / WhatsApp</span>
-                    <a href="https://wa.me/5588996909768" target="_blank" class="block text-sm font-medium text-black hover:opacity-50 transition-opacity opacity-90">(88) 99690-9768</a>
+                    <span class="text-[9px] font-sans font-black uppercase tracking-widest opacity-40 block mb-2">Telefone / WhatsApp</span>
+                    <a href="https://wa.me/5588996909768" target="_blank" class="block font-sans text-sm font-medium text-[var(--text)] hover:opacity-50 transition-opacity opacity-90">(88) 99690-9768</a>
                 </div>
                 <div>
-                    <span class="text-[9px] font-black uppercase tracking-widest opacity-40 block mb-2">Localização</span>
-                    <p class="text-sm opacity-70 uppercase font-bold tracking-widest text-[10px]">Fortaleza, BR</p>
+                    <span class="text-[9px] font-sans font-black uppercase tracking-widest opacity-40 block mb-2">Localização</span>
+                    <p class="font-sans text-sm opacity-70 uppercase font-bold tracking-widest text-[10px]">Fortaleza, BR</p>
                 </div>
             </div>
 
-            <div class="flex flex-col space-y-4 uppercase text-[10px] font-black tracking-widest text-left md:text-right">
+            <div class="flex flex-col space-y-4 uppercase text-[10px] font-sans font-black tracking-widest text-left md:text-right">
                 <span class="text-[9px] opacity-40 block mb-2">Links & Sociais</span>
-                <a href="#projetos" class="hover:opacity-50 transition-opacity border-b border-black/10 pb-1 self-start md:self-end">Projetos</a>
-                <a href="https://www.behance.net/viniddmed" target="_blank" class="hover:opacity-50 transition-opacity border-b border-black/10 pb-1 self-start md:self-end">Behance</a>
-                <a href="https://www.instagram.com/rviniciusm" target="_blank" class="hover:opacity-50 transition-opacity border-b border-black/10 pb-1 self-start md:self-end">Instagram</a>
+                <a href="#projetos" class="hover:opacity-50 transition-opacity border-b border-white/10 pb-1 self-start md:self-end">Projetos</a>
+                <a href="https://www.behance.net/viniddmed" target="_blank" class="hover:opacity-50 transition-opacity border-b border-white/10 pb-1 self-start md:self-end">Behance</a>
+                <a href="https://www.instagram.com/rviniciusm" target="_blank" class="hover:opacity-50 transition-opacity border-b border-white/10 pb-1 self-start md:self-end">Instagram</a>
             </div>
         </div>
     </footer>
@@ -694,65 +974,286 @@
                 preloader.classList.add('loaded');
                 setTimeout(() => { preloader.remove(); }, 800);
             }
+            /* Recalcula a altura das gavetas abertas depois que as fontes carregam */
+            recalcularAcordeoes();
+            medirParallax();
+        });
+
+        /* Menu mobile em tela cheia */
+        function abrirMenu() {
+            const menu = document.getElementById('menu-mobile');
+            menu.classList.remove('hidden');
+            menu.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+        function fecharMenu() {
+            const menu = document.getElementById('menu-mobile');
+            if (!menu) return;
+            menu.classList.add('hidden');
+            menu.classList.remove('flex');
+            document.body.style.overflow = '';
+        }
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') fecharMenu();
         });
 
         const previewContainer = document.getElementById('preview-container');
         const previewImages = document.querySelectorAll('.preview-image');
 
-        function showPreview(id) {
+        function showPreview(id, isPosterFormat) {
             if (window.innerWidth > 1024) {
                 previewContainer.classList.add('active');
+                
+                if (isPosterFormat) {
+                    previewContainer.classList.add('is-poster');
+                } else {
+                    previewContainer.classList.remove('is-poster');
+                }
+
                 previewImages.forEach(img => img.classList.remove('visible'));
                 const target = document.getElementById('img-' + id);
                 if(target) target.classList.add('visible');
             }
         }
-        function hidePreview() { previewContainer.classList.remove('active'); }
+
+        function hidePreview() {
+            previewContainer.classList.remove('active');
+        }
+
+        /* No celular não tem hover nem preview, então o destaque azul/roxo
+           passa sozinho de projeto em projeto no hero, um de cada vez,
+           1,2s em cada, começando no primeiro. Só roda até 768px e pausa
+           quando o hero sai da tela */
+        const heroLinks = document.querySelectorAll('.hero-inline-link');
+        let destaqueHero = -1;
+        let intervaloHero = null;
+        let heroVisivel = true;
+        function pararDestaqueHero() {
+            if (intervaloHero) { clearInterval(intervaloHero); intervaloHero = null; }
+            heroLinks.forEach(link => link.classList.remove('hero-destaque'));
+            destaqueHero = -1;
+        }
+        function iniciarDestaqueHero() {
+            pararDestaqueHero();
+            if (window.innerWidth > 768 || heroLinks.length === 0) return;
+            const avancar = () => {
+                heroLinks.forEach(link => link.classList.remove('hero-destaque'));
+                destaqueHero = (destaqueHero + 1) % heroLinks.length;
+                heroLinks[destaqueHero].classList.add('hero-destaque');
+            };
+            avancar();
+            intervaloHero = setInterval(avancar, 1200);
+        }
+        const heroHeader = document.querySelector('header');
+        if (heroHeader && 'IntersectionObserver' in window) {
+            new IntersectionObserver((entries) => {
+                entries.forEach(e => {
+                    heroVisivel = e.isIntersecting;
+                    if (e.isIntersecting) iniciarDestaqueHero();
+                    else pararDestaqueHero();
+                });
+            }, { threshold: 0.2 }).observe(heroHeader);
+        } else {
+            iniciarDestaqueHero();
+        }
+
+        /* Troca só a imagem grande do menu de serviços no hover */
+        function trocarServico(src) {
+            const img = document.getElementById('img-servicos');
+            if (img) { img.src = src; }
+        }
+
+        /* Stories da seção Social Media: cada cliente tem 2, e o botão dentro
+           de cada story troca só o story daquele cliente */
+        const storiesPorCliente = {
+            ok: ['images/story1.jpg', 'images/story2.jpg'],
+            mansions: ['images/Instagram story - 6.jpg', 'images/Instagram story - 7.jpg'],
+            alessandra: ['images/Instagram story - 1.jpg', 'images/Instagram story - 2.jpg']
+        };
+        /* Pré-carrega os 6 stories logo no carregamento da página, pra troca
+           ser instantânea e nunca aparecer o fundo preto entre um story e outro */
+        Object.values(storiesPorCliente).flat().forEach(src => { const pre = new Image(); pre.src = src; });
+        const storyEstado = { ok: 0, mansions: 0, alessandra: 0 };
+        function trocarStory(cliente, n) {
+            if (storyEstado[cliente] === n) return;
+            storyEstado[cliente] = n;
+            const img = document.getElementById('story-' + cliente);
+            const novoSrc = storiesPorCliente[cliente][n];
+            document.getElementById('btn-' + cliente + '-a').classList.toggle('ativo', n === 0);
+            document.getElementById('btn-' + cliente + '-b').classList.toggle('ativo', n === 1);
+            /* Só começa o fade depois que a nova imagem já está carregada:
+               assim a troca é um dissolve rápido, sem frame preto no meio */
+            const pre = new Image();
+            const aplicar = () => {
+                if (!img) return;
+                img.classList.add('trocando');
+                setTimeout(() => {
+                    img.src = novoSrc;
+                    img.classList.remove('trocando');
+                }, 150);
+            };
+            pre.onload = aplicar;
+            pre.onerror = aplicar;
+            pre.src = novoSrc;
+        }
+
+        /* Acordeão da Trajetória: + abre e vira −, − recolhe e vira + */
+        function alternarAcordeao(botao) {
+            const item = botao.closest('.acordeao-item');
+            const conteudo = item.querySelector('.acordeao-conteudo');
+            const aberto = item.classList.toggle('aberto');
+            botao.setAttribute('aria-expanded', aberto ? 'true' : 'false');
+            conteudo.style.maxHeight = aberto ? conteudo.scrollHeight + 'px' : '0px';
+        }
+        function recalcularAcordeoes() {
+            document.querySelectorAll('.acordeao-item.aberto .acordeao-conteudo').forEach(conteudo => {
+                conteudo.style.maxHeight = conteudo.scrollHeight + 'px';
+            });
+        }
+        /* Primeira gaveta já aberta ao carregar, como na referência */
+        (function abrirPrimeiraGaveta() {
+            const primeiro = document.querySelector('.acordeao-item');
+            if (!primeiro) return;
+            const botao = primeiro.querySelector('.acordeao-botao');
+            const conteudo = primeiro.querySelector('.acordeao-conteudo');
+            primeiro.classList.add('aberto');
+            botao.setAttribute('aria-expanded', 'true');
+            conteudo.style.maxHeight = conteudo.scrollHeight + 'px';
+        })();
 
         const cursor = document.getElementById('cursor-box');
         let mX = 0, mY = 0;
         document.addEventListener('mousemove', (e) => {
             mX = e.clientX; mY = e.clientY;
-            cursor.style.transform = `translate(${mX - 6}px, ${mY - 6}px)`;
+            if (cursor) {
+                cursor.style.transform = `translate(${mX - 6}px, ${mY - 6}px)`;
+            }
         });
 
-        document.querySelectorAll('a, .hero-link-item, .exp-row, .tool-card').forEach(el => {
+        document.querySelectorAll('a, .hero-inline-link, .tool-card').forEach(el => {
             el.addEventListener('mouseenter', () => {
-                if (window.innerWidth > 1024) {
-                    cursor.style.transform += ' scale(5)';
+                if (window.innerWidth > 1024 && cursor) {
+                    cursor.style.transform += ' scale(3.5)';
+                    if(el.classList.contains('hero-inline-link')) {
+                        cursor.style.backgroundColor = 'var(--blue-hover)';
+                    } else {
+                        cursor.style.backgroundColor = 'var(--neon)';
+                    }
                 }
             });
             el.addEventListener('mouseleave', () => {
-                cursor.style.transform = cursor.style.transform.replace(' scale(5)', '');
+                if (cursor) {
+                    cursor.style.transform = cursor.style.transform.replace(' scale(3.5)', '');
+                    cursor.style.backgroundColor = 'var(--text)';
+                }
             });
         });
 
-        const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
+        const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -40px 0px" };
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach(e => { 
-                if(e.isIntersecting) {
-                    e.target.classList.add('active'); 
-                }
-            });
+            entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('active'); }});
         }, observerOptions);
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        /* Elementos das animações de scroll, buscados uma vez só */
+        const parallaxContainer = document.getElementById('parallax-container');
+        const parallaxImg = document.getElementById('parallax-img');
+        const projetosSection = document.getElementById('projetos');
+        const projetosTrack = document.getElementById('projetos-track');
+
+        /* Folga do parallax medida uma vez (e no resize/load), pra não forçar
+           recálculo de layout a cada frame de scroll — era um dos culpados do engasgo */
+        let folgaParallax = 0;
+        function medirParallax() {
+            if (parallaxContainer && parallaxImg) {
+                folgaParallax = parallaxImg.offsetHeight - parallaxContainer.offsetHeight;
+            }
+        }
+        medirParallax();
+
+        /* Rolagem lateral dos Projetos com interpolação (só no desktop, onde
+           a seção é horizontal): em vez de pular direto pra posição do scroll,
+           a faixa desliza até ela a cada frame — é o que dá a sensação de
+           120 fps, sem engasgo */
+        let alvoProjetos = 0;
+        let atualProjetos = 0;
+        let animandoProjetos = false;
+        function animarProjetos() {
+            if (window.innerWidth <= 768) { animandoProjetos = false; return; }
+            atualProjetos += (alvoProjetos - atualProjetos) * 0.25;
+            if (Math.abs(alvoProjetos - atualProjetos) < 0.5) atualProjetos = alvoProjetos;
+            if (projetosTrack) projetosTrack.style.transform = `translate3d(${-atualProjetos}px, 0, 0)`;
+            if (atualProjetos !== alvoProjetos) {
+                requestAnimationFrame(animarProjetos);
+            } else {
+                animandoProjetos = false;
+            }
+        }
+
+        /* Arrastar a faixa de Projetos com o mouse (ou o dedo), só no desktop:
+           arrastar pra esquerda avança os projetos, pra direita volta. O arrastar
+           move a rolagem da página em si, então fica sincronizado com o scroll normal.
+           Só vira arrastar de verdade depois de 6px de movimento: antes disso é
+           um clique, e a captura do ponteiro e o scroll só começam depois do limiar.
+           Sem isso, qualquer tremidinha do mouse já rolava a página e o clique
+           não chegava no link — era por isso que "Ver projeto" e "Ver site" não
+           abriam no desktop. */
+        let arrastando = false;
+        let arrastoAtivo = false;
+        let arrastoX = 0;
+        let arrastoDist = 0;
+        if (projetosTrack) {
+            projetosTrack.querySelectorAll('img').forEach(img => { img.draggable = false; });
+            projetosTrack.addEventListener('pointerdown', (e) => {
+                if (window.innerWidth <= 768) return;
+                arrastando = true;
+                arrastoAtivo = false;
+                arrastoX = e.clientX;
+                arrastoDist = 0;
+            });
+            projetosTrack.addEventListener('pointermove', (e) => {
+                if (!arrastando) return;
+                const dx = e.clientX - arrastoX;
+                arrastoX = e.clientX;
+                arrastoDist += Math.abs(dx);
+                if (!arrastoAtivo && arrastoDist > 6) {
+                    arrastoAtivo = true;
+                    projetosTrack.classList.add('arrastando');
+                    try { projetosTrack.setPointerCapture(e.pointerId); } catch (err) {}
+                }
+                if (arrastoAtivo) {
+                    /* Arrastar pra esquerda (dx negativo) desce a página = avança os projetos */
+                    window.scrollBy(0, -dx * 2);
+                }
+            });
+            const fimArrasto = () => {
+                arrastando = false;
+                arrastoAtivo = false;
+                projetosTrack.classList.remove('arrastando');
+            };
+            projetosTrack.addEventListener('pointerup', fimArrasto);
+            projetosTrack.addEventListener('pointercancel', fimArrasto);
+            /* Se arrastou de verdade, o clique ao soltar não abre o link do card */
+            projetosTrack.addEventListener('click', (e) => {
+                if (arrastoDist > 6) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    arrastoDist = 0;
+                }
+            }, true);
+        }
 
         let isTicking = false;
 
         function handleScrollAnimations() {
-            const parallaxContainer = document.getElementById('parallax-container');
-            const parallaxImg = document.getElementById('parallax-img');
-            
             if (parallaxContainer && parallaxImg) {
-                const rect = parallaxContainer.getBoundingClientRect();
-                const windowHeight = window.innerHeight;
-                
-                if (rect.top <= windowHeight && rect.bottom >= 0) {
-                    const scrollPercent = (windowHeight - rect.top) / (windowHeight + rect.height);
-                    const yMove = -(scrollPercent * 30); 
-                    if (window.innerWidth > 1024) parallaxImg.style.transition = 'none'; 
-                    parallaxImg.style.transform = `translateY(${yMove}%)`;
-                }
+                /* Parallax forte e rápido: a imagem tem 160% da altura do container,
+                   então a folga é 60% (ela pode subir até 37,5% da própria altura
+                   sem deixar margem). O movimento segue o scroll da página desde o
+                   topo — 0,4px de imagem por 1px de scroll — então qualquer rolagem
+                   já mexe a imagem, e trava na folga máxima quando chega lá. */
+                const yMove = Math.min(window.scrollY * 0.4, folgaParallax);
+                parallaxImg.style.transform = `translateY(${-yMove}px)`;
             }
 
             const calcProgress = (sectionElement) => {
@@ -764,22 +1265,14 @@
 
             const paddingRight = window.innerWidth > 768 ? 64 : 24;
 
-            // Animação Track 1: Projetos
-            const projetosSection = document.getElementById('projetos');
-            const projetosTrack = document.getElementById('projetos-track');
-            if (projetosSection && projetosTrack) {
+            if (projetosSection && projetosTrack && window.innerWidth > 768) {
                 let prog1 = calcProgress(projetosSection);
                 const maxScroll1 = projetosTrack.scrollWidth - window.innerWidth + paddingRight;
-                projetosTrack.style.transform = `translate3d(${-prog1 * maxScroll1}px, 0, 0)`;
-            }
-
-            // Animação Track 2: Social Media (Multi-clientes)
-            const socialSection = document.getElementById('social');
-            const socialTrack = document.getElementById('social-track');
-            if (socialSection && socialTrack) {
-                let prog2 = calcProgress(socialSection);
-                const maxScroll2 = socialTrack.scrollWidth - window.innerWidth + paddingRight;
-                socialTrack.style.transform = `translate3d(${-prog2 * maxScroll2}px, 0, 0)`;
+                alvoProjetos = prog1 * maxScroll1;
+                if (!animandoProjetos) {
+                    animandoProjetos = true;
+                    requestAnimationFrame(animarProjetos);
+                }
             }
         }
 
@@ -791,9 +1284,33 @@
                 });
                 isTicking = true;
             }
-        });
+        }, { passive: true });
         
-        window.addEventListener('resize', handleScrollAnimations);
+        /* No celular o resize dispara a cada rolagem (a barra do navegador
+           aparece e some e muda a altura), então o que depende de trocar
+           entre mobile e desktop só roda quando a LARGURA muda de fato */
+        let larguraJanela = window.innerWidth;
+        window.addEventListener('resize', () => {
+            medirParallax();
+            handleScrollAnimations();
+            recalcularAcordeoes();
+            if (window.innerWidth !== larguraJanela) {
+                larguraJanela = window.innerWidth;
+                if (window.innerWidth >= 768) fecharMenu();
+                if (window.innerWidth <= 768 && projetosTrack) {
+                    projetosTrack.style.transform = '';
+                    alvoProjetos = 0;
+                    atualProjetos = 0;
+                }
+                /* Zera o estado do arrastar na troca mobile/desktop, pra um
+                   arrasto antigo não bloquear o próximo clique */
+                arrastando = false;
+                arrastoAtivo = false;
+                arrastoDist = 0;
+                if (projetosTrack) projetosTrack.classList.remove('arrastando');
+                if (heroVisivel) iniciarDestaqueHero();
+            }
+        });
         handleScrollAnimations(); 
     </script>
 </body>
